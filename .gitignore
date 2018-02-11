@@ -1,0 +1,11 @@
+/.vs
+
+/CityBuilder/obj
+
+/CityBuilder/bin
+/CityBuilderGUI/obj
+
+/CityBuilderGUI/bin
+/CityBuilderTests/obj
+
+/CityBuilderTests/bin
