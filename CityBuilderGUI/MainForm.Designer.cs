@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -9,81 +7,8 @@ using CityBuilding;
 
 namespace CityBuilderGUI
 {
-    public class BrushForTileCreator
-    {
-        public virtual Brush Create(ITile tile, IMap map)
-        {
-            Color color;
-            switch (tile.TileState)
-            {
-                case TileState.Blocked:
-                    color = Color.Gray;
-                    break;
-                case TileState.Empty:
-                    color = Color.LightYellow;
-                    break;
-                case TileState.Street:
-                    color = Color.SaddleBrown;
-                    break;
-                case TileState.Full:
-                    var guid = map.Buildings.First(b => b.Tiles.Any(t => t == tile)).Guid;
-                    color = Color.FromArgb(guid.GetHashCode());
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            return new SolidBrush(color);
-        }
-    }
     partial class MainForm
     {
-
-        const int TileSize = 20;
-
-        private Dictionary<Rectangle, ITile> _rectangleTilePairs;
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-
-            Graphics g = e.Graphics;
-            
-                for (int i = 0; i < _map.Width; i++)
-                {
-                    for (int j = 0; j < _map.Height; j++)
-                    {
-                        var tile = _map[i, j];
-                        var brush = new BrushForTileCreator().Create(tile, _map);
-                        var rectangle = _rectangleTilePairs.Where(a => a.Value == tile).First().Key; 
-                    
-                        g.FillRectangle(brush, rectangle);
-
-                    brush.Dispose();
-                    }
-                }
-        }
-
-
-        private void OnClick(object sender, MouseEventArgs e)
-        {
-            var rectangleTilePairs = _rectangleTilePairs.Where(a => a.Key.Contains(e.Location));
-            if (rectangleTilePairs.Any())
-            {
-                var rectangleTilePair = rectangleTilePairs.First();
-                if (rectangleTilePair.Value.TileState == TileState.Blocked)
-                {
-                    rectangleTilePair.Value.TileState = TileState.Empty;
-                }
-                else if (rectangleTilePair.Value.TileState == TileState.Empty)
-                {
-                    rectangleTilePair.Value.TileState = TileState.Blocked;
-                }
-                this.Refresh();
-            }
-
-            MainForm_MouseDown(sender, e);
-        }
-
         private IContainer components = null;
 
         protected override void Dispose(bool disposing)

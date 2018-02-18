@@ -5,7 +5,6 @@ namespace CityBuilding
 {
     public class StreetsAppender
     {
-
         public virtual IEnumerable<ITile> AppendStreets(IMap map, IList<EmptyAreaGroup> emptyAreas)
         {
             var result = new List<ITile>();

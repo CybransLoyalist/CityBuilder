@@ -9,6 +9,7 @@ namespace CityBuilding
         Orthogonal,
         All
     }
+
     public class Map : IMap
     {
         private readonly ITile[,] _tiles;
