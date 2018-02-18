@@ -51,6 +51,7 @@
     <Compile Include="Map.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StreetsAppender.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="TileState.cs" />
   </ItemGroup>
