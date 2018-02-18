@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using CityBuilding;
 
-namespace CityBuilding
+namespace CityBuilder.Buildings
 {
-    public class Building : IBuilding
+    public abstract class Building : IBuilding
     {
-        public Building(Guid guid)
+        protected Building(Guid guid)
         {
             Guid = guid;
             Tiles = new List<ITile>();
@@ -13,5 +14,6 @@ namespace CityBuilding
 
         public Guid Guid { get; }
         public IList<ITile> Tiles { get; }
+        public abstract ITilePattern TilePattern { get; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CityBuilder;
 using CityBuilding;
 using Point = System.Drawing.Point;
 
@@ -84,9 +85,10 @@ namespace CityBuilderGUI
 
         private void FillMapWithBuildings(object sender, EventArgs e)
         {
-            new CityBuilder(
+            new MapWithBuildingsFiller(
                 new EmptyAreaGroupGetter(),
-                new StreetsAppender()).FillMap(_map);
+                new StreetsAppender(),
+                new AreaWithBuildingFiller()).FillMap(_map);
             Refresh();
         }
 

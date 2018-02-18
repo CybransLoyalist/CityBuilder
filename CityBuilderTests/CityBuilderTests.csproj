@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuildingTests.cs" />
+    <Compile Include="Buildings\BuildingTests.cs" />
+    <Compile Include="Buildings\BuildingTilesOnMapLocator.cs" />
     <Compile Include="EmptyAreaGroupGetterTests.cs" />
     <Compile Include="MapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

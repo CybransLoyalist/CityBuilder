@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Drawing;
+using CityBuilder.Buildings;
 
 namespace CityBuilding
 {

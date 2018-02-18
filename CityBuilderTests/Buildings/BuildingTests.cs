@@ -1,8 +1,8 @@
 using System;
-using CityBuilding;
+using CityBuilder.Buildings;
 using NUnit.Framework;
 
-namespace CityBuilderTests
+namespace CityBuilderTests.Buildings
 {
     [TestFixture]
     public class BuildingTests
@@ -11,14 +11,14 @@ namespace CityBuilderTests
         public void ConstructorShallSetGuid()
         {
             var guid = Guid.NewGuid();
-            var building = new Building(guid);
+            var building = new SingleTileBuilding(guid);
             Assert.AreEqual(guid, building.Guid);
         }
 
         [Test]
         public void ConstructorShallSetEmptyTilesList()
         {
-            var building = new Building(Guid.NewGuid());
+            var building = new ShortOrthogonalBuilding(Guid.NewGuid());
             Assert.NotNull(building.Tiles);
             Assert.AreEqual(0, building.Tiles.Count);
         }
