@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,7 +13,7 @@ namespace CityBuilderGUI
     {
         public virtual Brush Create(ITile tile, IMap map)
         {
-            System.Drawing.Color color;
+            Color color;
             switch (tile.TileState)
             {
                 case TileState.Blocked:
@@ -20,6 +21,9 @@ namespace CityBuilderGUI
                     break;
                 case TileState.Empty:
                     color = Color.LightYellow;
+                    break;
+                case TileState.Street:
+                    color = Color.SaddleBrown;
                     break;
                 case TileState.Full:
                     var guid = map.Buildings.First(b => b.Tiles.Any(t => t == tile)).Guid;
@@ -29,7 +33,7 @@ namespace CityBuilderGUI
                     throw new ArgumentOutOfRangeException();
             }
 
-            return new System.Drawing.SolidBrush(color);
+            return new SolidBrush(color);
         }
     }
     partial class MainForm
@@ -37,7 +41,7 @@ namespace CityBuilderGUI
 
         const int TileSize = 20;
 
-        private Dictionary<Rectangle, ITile> _rectangleTilePairs = new Dictionary<Rectangle, ITile>();
+        private Dictionary<Rectangle, ITile> _rectangleTilePairs;
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -76,9 +80,11 @@ namespace CityBuilderGUI
                 }
                 this.Refresh();
             }
+
+            MainForm_MouseDown(sender, e);
         }
 
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         protected override void Dispose(bool disposing)
         {
@@ -98,24 +104,38 @@ namespace CityBuilderGUI
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(197, 227);
+            this.button1.Location = new System.Drawing.Point(562, 535);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
+            this.button1.Text = "Fill";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.FillMapWithBuildings);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(481, 535);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Clear";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Clear);
+            // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(649, 570);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "MainForm";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnClick);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
             this.ResumeLayout(false);
 
         }
@@ -123,6 +143,7 @@ namespace CityBuilderGUI
         #endregion
 
         private Button button1;
+        private Button button2;
     }
 }
 

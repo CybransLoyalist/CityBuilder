@@ -32,7 +32,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,8 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Building.cs" />
     <Compile Include="CityBuilder.cs" />
+    <Compile Include="EmptyAreaGroup.cs" />
+    <Compile Include="EmptyAreaGroupGetter.cs" />
+    <Compile Include="IBuilding.cs" />
+    <Compile Include="IMap.cs" />
+    <Compile Include="IPoint.cs" />
+    <Compile Include="ITile.cs" />
+    <Compile Include="Map.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tile.cs" />
+    <Compile Include="TileState.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
