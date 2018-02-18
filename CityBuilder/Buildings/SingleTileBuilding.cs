@@ -6,16 +6,13 @@ namespace CityBuilder.Buildings
 {
     public class SingleTileBuilding : Building
     {
-        public SingleTileBuilding(Guid guid) : base(guid)
+        public SingleTileBuilding(Guid guid, Angle angle) : base(guid, angle)
         {
         }
 
-        public override ITilePattern TilePattern => new TilePattern
+        public override IList<ITilePattern> TilePatterns => new List<ITilePattern>
         {
-            Transformations = new List<Point>
-            {
-                new Point(0, 0)
-            }
+            new TilePattern(new Point(0, 0), Direction.Left, Direction.Top, Direction.Right, Direction.Bottom),
         };
     }
 }

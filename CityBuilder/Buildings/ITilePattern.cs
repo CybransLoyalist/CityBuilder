@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using CityBuilder.Buildings;
 
 namespace CityBuilding
 {
     public interface ITilePattern
     {
-        IList<Point> Transformations { get; }
+        IPoint Transformation { get; set; }
+        IList<Direction> PossibleDoorDirections { get; set; }
     }
 }

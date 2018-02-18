@@ -7,16 +7,16 @@ namespace CityBuilder
 {
     public class BuildingTilesOnMapLocator
     {
-        public virtual IEnumerable<ITile> Locate(IMap map, IBuilding building, Point placingPointOnMap, Angle angle)
+        public virtual IEnumerable<ITile> Locate(IMap map, IBuilding building, IPoint placingPointOnMap)
         {
-            foreach (var transformation in building.TilePattern.Transformations)
+            foreach (var tilePattern in building.TilePatterns)
             {
-                var buildingTilePoint = Transform(placingPointOnMap, transformation, angle);
+                var buildingTilePoint = Transform(placingPointOnMap, tilePattern.Transformation, building.Angle);
                 yield return map[buildingTilePoint.X, buildingTilePoint.Y];
             }
         }
 
-        private static Point Transform(Point placingPointOnMap, Point transformation, Angle angle)
+        private static Point Transform(IPoint placingPointOnMap, IPoint transformation, Angle angle)
         {
             var rotatedTransformation = RotatePoint(transformation, angle);
 
@@ -25,7 +25,7 @@ namespace CityBuilder
             return new Point(x, y);
         }
 
-        private static Point RotatePoint(Point pointToRotate, Angle angle)
+        private static Point RotatePoint(IPoint pointToRotate, Angle angle)
         {
             switch (angle)
             {

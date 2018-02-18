@@ -41,6 +41,16 @@ namespace CityBuilderGUI
                     brush.Dispose();
                 }
             }
+
+            foreach (var locationsOfBuilding in _map.LocationsOfBuildings)
+            {
+                var location = locationsOfBuilding.Key;
+                var building = locationsOfBuilding.Value;
+                var door = building.Door;
+                var doorTilePattern = door.TilePattern;
+
+                var tiles = new BuildingTilesOnMapLocator().Locate(_map, building, location);
+            }
         }
 
 

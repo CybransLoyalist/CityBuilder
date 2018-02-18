@@ -22,7 +22,7 @@ namespace CityBuilderGUI
                     color = Color.SaddleBrown;
                     break;
                 case TileState.Full:
-                    var guid = map.Buildings.First(b => b.Tiles.Any(t => t == tile)).Guid;
+                    var guid = map.GetBuildingAtTile(tile).Guid;
                     color = Color.FromArgb(guid.GetHashCode());
                     break;
                 default:

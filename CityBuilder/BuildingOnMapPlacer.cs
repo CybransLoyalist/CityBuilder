@@ -14,13 +14,13 @@ namespace CityBuilder
 
         public virtual void PlaceBuildingOn(IMap map, IBuilding building, Point placingPointOnMap, Angle angle)
         {
-            map.Buildings.Add(building);
+            map.LocationsOfBuildings.Add(placingPointOnMap, building);
 
-            var buildingTiles = _buildingTilesOnMapLocator.Locate(map, building, placingPointOnMap, angle);
+            var buildingTiles = _buildingTilesOnMapLocator.Locate(map, building, placingPointOnMap);
             foreach (var buildingTile in buildingTiles)
             {
                 buildingTile.TileState = TileState.Full;
-                building.Tiles.Add(buildingTile);
+               // building.Tiles.Add(buildingTile);
             }
         }
     }

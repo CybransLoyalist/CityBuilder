@@ -24,7 +24,7 @@ namespace CityBuilder
 
             foreach (var emptyAreaGroup in emptyAreas)
             {
-                _areaWithBuildingFiller.Fill(emptyAreaGroup);
+                _areaWithBuildingFiller.Fill(initialMap, emptyAreaGroup);
             }
         }
 

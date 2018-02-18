@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using CityBuilder;
 using CityBuilder.Buildings;
 
 namespace CityBuilding
@@ -16,7 +17,7 @@ namespace CityBuilding
         private readonly ITile[,] _tiles;
         public int Width { get; }
         public int Height { get; }
-        public IList<IBuilding> Buildings { get; } = new List<IBuilding>();
+        public Dictionary<IPoint, IBuilding> LocationsOfBuildings { get; } = new Dictionary<IPoint, IBuilding>();
         private readonly Dictionary<ITile, IPoint> _tilesLocations = new Dictionary<ITile, IPoint>();
 
 
@@ -98,6 +99,22 @@ namespace CityBuilding
         public IPoint GetLocationOf(ITile tile)
         {
             return _tilesLocations[tile];
+        }
+
+        public IBuilding GetBuildingAtTile(ITile tile)
+        {
+            foreach (var locationsOfBuilding in LocationsOfBuildings)
+            {
+                var location = locationsOfBuilding.Key;
+                var building = locationsOfBuilding.Value;
+                var allTilesOfBuilding = new BuildingTilesOnMapLocator().Locate(this, building, location);
+                if (allTilesOfBuilding.Contains(tile))
+                {
+                    return building;
+                }
+            }
+
+            return null;
         }
     }
 }

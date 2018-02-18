@@ -10,9 +10,10 @@ namespace CityBuilding
         int Width { get;  }
         int Height { get;  }
         ITile this[int x, int y] { get; }
-        IList<IBuilding> Buildings { get; }
+        Dictionary<IPoint, IBuilding> LocationsOfBuildings { get; }
         IEnumerable<ITile> Tiles { get; }
         IEnumerable<ITile> GetNeighboursOf(ITile tile, NeighbourMode neighbourMode);
         IPoint GetLocationOf(ITile tile);
+        IBuilding GetBuildingAtTile(ITile tile);
     }
 }
