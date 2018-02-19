@@ -5,13 +5,18 @@ namespace CityBuilding
 {
     public class TilePattern : ITilePattern
     {
-        public TilePattern(IPoint point, params Direction[] possibleDoorDirections)
+        public TilePattern(IPoint point) : this(point, false)
         {
+        }
+
+        public TilePattern(IPoint point, bool isDoor)
+        {
+
             Transformation = point;
-            PossibleDoorDirections = possibleDoorDirections;
+            IsDoor = isDoor;
         }
 
         public IPoint Transformation { get; set; }
-        public IList<Direction> PossibleDoorDirections { get; set; }
+        public bool IsDoor { get; set; }
     }
 }

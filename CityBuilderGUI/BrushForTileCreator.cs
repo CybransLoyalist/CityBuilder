@@ -21,6 +21,9 @@ namespace CityBuilderGUI
                 case TileState.Street:
                     color = Color.SaddleBrown;
                     break;
+                case TileState.Door:
+                    color = Color.SandyBrown;
+                    break;
                 case TileState.Full:
                     var guid = map.GetBuildingAtTile(tile).Guid;
                     color = Color.FromArgb(guid.GetHashCode());

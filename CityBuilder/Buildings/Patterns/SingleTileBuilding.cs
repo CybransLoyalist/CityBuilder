@@ -12,7 +12,8 @@ namespace CityBuilder.Buildings
 
         public override IList<ITilePattern> TilePatterns => new List<ITilePattern>
         {
-            new TilePattern(new Point(0, 0), Direction.Left, Direction.Top, Direction.Right, Direction.Bottom),
+            new TilePattern(new Point(0, 0)),
+            new TilePattern(new Point(0, 1), true),
         };
     }
 }

@@ -53,6 +53,8 @@ namespace CityBuilding
             }
         }
 
+        public IDictionary<IBuilding, IEnumerable<ITile>> BuildingsTiles { get; set; } = new Dictionary<IBuilding, IEnumerable<ITile>>();
+
         public IEnumerable<ITile> GetNeighboursOf(ITile tile, NeighbourMode neighbourMode)
         {
             var result = new List<ITile>();
@@ -105,9 +107,8 @@ namespace CityBuilding
         {
             foreach (var locationsOfBuilding in LocationsOfBuildings)
             {
-                var location = locationsOfBuilding.Key;
                 var building = locationsOfBuilding.Value;
-                var allTilesOfBuilding = new BuildingTilesOnMapLocator().Locate(this, building, location);
+                var allTilesOfBuilding = BuildingsTiles[building];
                 if (allTilesOfBuilding.Contains(tile))
                 {
                     return building;

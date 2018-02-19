@@ -5,6 +5,7 @@
         Blocked,
         Empty,
         Full,
-        Street
+        Street,
+        Door
     }
 }

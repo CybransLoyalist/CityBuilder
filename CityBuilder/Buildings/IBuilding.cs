@@ -9,7 +9,6 @@ namespace CityBuilder.Buildings
     {
         Guid Guid { get; }
         IList<ITilePattern> TilePatterns { get; }
-        IDoor Door { get; }
         Angle Angle { get; }
     }
 }

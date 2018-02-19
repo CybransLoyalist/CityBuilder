@@ -9,6 +9,30 @@ using Point = System.Drawing.Point;
 
 namespace CityBuilderGUI
 {
+    public class MapDrawer
+    {
+        public void Draw(IMap map, Graphics graphics, int TileSize)
+        {
+            for (int i = 0; i < map.Width; i++)
+            {
+                for (int j = 0; j < map.Height; j++)
+                {
+                    var tile = map[i, j];
+                    if (tile.TileState == TileState.Full)
+                    {
+                        continue;
+                    }
+                    var brush = new BrushForTileCreator().Create(tile, map);
+                    var rectangle = new Rectangle(i * (TileSize + 1), j * (TileSize + 1), TileSize, TileSize);
+
+                    graphics.FillRectangle(brush, rectangle);
+
+                    brush.Dispose();
+                }
+            }
+        }
+    }
+
     public partial class MainForm : Form
     {
         private Map _map;
@@ -25,32 +49,8 @@ namespace CityBuilderGUI
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-
-            Graphics g = e.Graphics;
-
-            for (int i = 0; i < _map.Width; i++)
-            {
-                for (int j = 0; j < _map.Height; j++)
-                {
-                    var tile = _map[i, j];
-                    var brush = new BrushForTileCreator().Create(tile, _map);
-                    var rectangle = _rectangleTilePairs.Where(a => a.Value == tile).First().Key;
-
-                    g.FillRectangle(brush, rectangle);
-
-                    brush.Dispose();
-                }
-            }
-
-            foreach (var locationsOfBuilding in _map.LocationsOfBuildings)
-            {
-                var location = locationsOfBuilding.Key;
-                var building = locationsOfBuilding.Value;
-                var door = building.Door;
-                var doorTilePattern = door.TilePattern;
-
-                var tiles = new BuildingTilesOnMapLocator().Locate(_map, building, location);
-            }
+            
+            new MapDrawer().Draw(_map, e.Graphics, TileSize);
         }
 
 
@@ -105,7 +105,6 @@ namespace CityBuilderGUI
         public void MainForm_MouseDown(object sender, MouseEventArgs e)
         {
             RectStartPoint = e.Location;
-            // Invalidate();
         }
 
         public Point RectStartPoint { get; set; }
@@ -128,7 +127,7 @@ namespace CityBuilderGUI
 
         private void MainForm_MouseUp(object sender, MouseEventArgs e)
         {
-            var rectangleTilePairs = _rectangleTilePairs.Where(a => 
+            var rectangleTilePairs = _rectangleTilePairs.Where(a =>
                 Rect.Contains(Center(a.Key)) ||
                 Rect.Contains(LeftTop(a.Key)) ||
                 Rect.Contains(LeftBottom(a.Key)) ||
@@ -160,12 +159,12 @@ namespace CityBuilderGUI
 
         public static Point RightTop(Rectangle rect)
         {
-            return new Point(rect.Right , rect.Top );
+            return new Point(rect.Right, rect.Top);
         }
 
         public static Point RightBottom(Rectangle rect)
         {
-            return new Point(rect.Right , rect.Bottom);
+            return new Point(rect.Right, rect.Bottom);
         }
 
         private void Clear(object sender, EventArgs e)

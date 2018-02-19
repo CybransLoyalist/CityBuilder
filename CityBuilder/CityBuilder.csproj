@@ -46,8 +46,7 @@
     <Compile Include="BuildingOnMapPlacer.cs" />
     <Compile Include="Buildings\Building.cs" />
     <Compile Include="Buildings\Direction.cs" />
-    <Compile Include="Buildings\IDoor.cs" />
-    <Compile Include="Buildings\LongOrthogonalBuilding.cs" />
+    <Compile Include="Buildings\Patterns\LongOrthogonalBuilding.cs" />
     <Compile Include="BuildingTilesOnMapLocator.cs" />
     <Compile Include="MapWithBuildingsFiller.cs" />
     <Compile Include="EmptyAreaGroup.cs" />
@@ -60,8 +59,8 @@
     <Compile Include="Map.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Buildings\SingleTileBuilding.cs" />
-    <Compile Include="Buildings\ShortOrthogonalBuilding.cs" />
+    <Compile Include="Buildings\Patterns\SingleTileBuilding.cs" />
+    <Compile Include="Buildings\Patterns\ShortOrthogonalBuilding.cs" />
     <Compile Include="StreetsAppender.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="TilePattern.cs" />

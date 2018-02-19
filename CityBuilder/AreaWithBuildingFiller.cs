@@ -36,12 +36,8 @@ namespace CityBuilder
 
             var placingPointOnMap = map.GetLocationOf(emptyAreaGroup.Tiles.Random());
 
-            var tiles = new BuildingTilesOnMapLocator().Locate(map, building, placingPointOnMap);
-            ;
-            foreach (var tile in tiles)
-            {
-                tile.TileState = TileState.Full;
-            }
+             new BuildingTilesOnMapLocator().Locate(map, building, placingPointOnMap);
+            
             map.LocationsOfBuildings.Add(placingPointOnMap, building);
         }
     }

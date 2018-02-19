@@ -16,12 +16,7 @@ namespace CityBuilder
         {
             map.LocationsOfBuildings.Add(placingPointOnMap, building);
 
-            var buildingTiles = _buildingTilesOnMapLocator.Locate(map, building, placingPointOnMap);
-            foreach (var buildingTile in buildingTiles)
-            {
-                buildingTile.TileState = TileState.Full;
-               // building.Tiles.Add(buildingTile);
-            }
+            _buildingTilesOnMapLocator.Locate(map, building, placingPointOnMap);
         }
     }
 }

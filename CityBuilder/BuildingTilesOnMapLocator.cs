@@ -7,13 +7,17 @@ namespace CityBuilder
 {
     public class BuildingTilesOnMapLocator
     {
-        public virtual IEnumerable<ITile> Locate(IMap map, IBuilding building, IPoint placingPointOnMap)
+        public virtual void Locate(IMap map, IBuilding building, IPoint placingPointOnMap)
         {
+            var tilesOfBuilding = new List<ITile>();
             foreach (var tilePattern in building.TilePatterns)
             {
                 var buildingTilePoint = Transform(placingPointOnMap, tilePattern.Transformation, building.Angle);
-                yield return map[buildingTilePoint.X, buildingTilePoint.Y];
+                var tile = map[buildingTilePoint.X, buildingTilePoint.Y];
+                tilesOfBuilding.Add(tile);
+                tile.TileState = tilePattern.IsDoor ? TileState.Door : TileState.Full;
             }
+            map.BuildingsTiles.Add(building, tilesOfBuilding);
         }
 
         private static Point Transform(IPoint placingPointOnMap, IPoint transformation, Angle angle)
