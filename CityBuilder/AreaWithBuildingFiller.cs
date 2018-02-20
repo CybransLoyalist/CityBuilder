@@ -14,13 +14,40 @@ namespace CityBuilder
         public void DrawPathToEdge(IMap map, IPoint placingPointOnMap)
         {
             var astar = new SpatialAStar<ITile>(map.GetTilesArray());
-            var result = astar.Search(placingPointOnMap, map.GetLocationOf(map[20, 20]));
-            foreach (var tile in result)
+
+            var closestStreet = GetClosestStreet(placingPointOnMap, map);
+
+            var result = astar.Search(placingPointOnMap, closestStreet);
+            if (result != null)
             {
-                tile.TileState = TileState.Street;
+                foreach (var tile in result)
+                {
+                    tile.TileState = TileState.Street;
+                }
             }
         }
+
+        private IPoint GetClosestStreet(IPoint start, IMap map)
+        {
+            var streetTiles = map.Tiles.Where(a => a.TileState == TileState.Street).ToList();
+
+            var closestStreet = map.GetLocationOf(streetTiles.First());
+            var minDistance = Point.Distance(start, closestStreet);
+            for (int i = 1; i < streetTiles.Count(); i++)
+            {
+                var currStreet = map.GetLocationOf(streetTiles[i]);
+                var currDistance = Point.Distance(start, currStreet);
+                if (Point.Distance(start, currStreet) < minDistance)
+                {
+                    closestStreet = currStreet;
+                    minDistance = currDistance;
+                }
+            }
+
+            return closestStreet;
+        }
     }
+
     public class AreaWithBuildingFiller
     {
         private readonly BuildingTilesOnMapLocator _buildingTilesOnMapLocator;
@@ -62,14 +89,16 @@ namespace CityBuilder
                 }
 
                 canLocate = _buildingTilesOnMapLocator.CanLocate(map, building, placingPointOnMap);
-            } while (!canLocate && tilesToBeChecked.Any());
 
-            if (canLocate)
-            {
-                _buildingTilesOnMapLocator.Locate(map, building, placingPointOnMap);
-                _pathToStreetDrawer.DrawPathToEdge(map, placingPointOnMap);
-                map.LocationsOfBuildings.Add(placingPointOnMap, building);
-            }
+                if (canLocate)
+                {
+
+                    _buildingTilesOnMapLocator.Locate(map, building, placingPointOnMap);
+                    _pathToStreetDrawer.DrawPathToEdge(map, placingPointOnMap);
+                    map.LocationsOfBuildings.Add(placingPointOnMap, building);
+                }
+            } while (tilesToBeChecked.Any());
+
         }
     }
 }

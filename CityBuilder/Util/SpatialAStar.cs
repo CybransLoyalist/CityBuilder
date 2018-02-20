@@ -32,7 +32,7 @@ namespace SettlersEngine
 {
     public interface IPathNode
     {
-        Boolean IsWalkable();
+        bool IsWalkable();
     }
 
     public interface IIndexedObject
@@ -144,6 +144,8 @@ namespace SettlersEngine
         /// Returns null, if no path is found. Start- and End-Node are included in returned path. The user context
         /// is passed to IsWalkable().
         /// </summary>
+        /// 
+        /// 
         public LinkedList<TPathNode> Search(IPoint inStartNode, IPoint inEndNode)
         {
             PathNode startNode = m_SearchSpace[inStartNode.X, inStartNode.Y];
@@ -289,7 +291,9 @@ namespace SettlersEngine
             int y = inAround.Y;
 
             if ((x > 0) && (y > 0))
-                inNeighbors[0] = m_SearchSpace[x - 1, y - 1];
+            {
+                //inNeighbors[0] = m_SearchSpace[x - 1, y - 1];
+            }
             else
                 inNeighbors[0] = null;
 
@@ -299,7 +303,9 @@ namespace SettlersEngine
                 inNeighbors[1] = null;
 
             if ((x < Width - 1) && (y > 0))
-                inNeighbors[2] = m_SearchSpace[x + 1, y - 1];
+            {
+                //inNeighbors[2] = m_SearchSpace[x + 1, y - 1];
+            }
             else
                 inNeighbors[2] = null;
 
@@ -314,7 +320,9 @@ namespace SettlersEngine
                 inNeighbors[4] = null;
 
             if ((x > 0) && (y < Height - 1))
-                inNeighbors[5] = m_SearchSpace[x - 1, y + 1];
+            {
+                //inNeighbors[5] = m_SearchSpace[x - 1, y + 1];
+            }
             else
                 inNeighbors[5] = null;
 
@@ -324,10 +332,13 @@ namespace SettlersEngine
                 inNeighbors[6] = null;
 
             if ((x < Width - 1) && (y < Height - 1))
-                inNeighbors[7] = m_SearchSpace[x + 1, y + 1];
+            {
+                //inNeighbors[7] = m_SearchSpace[x + 1, y + 1];
+            }
             else
                 inNeighbors[7] = null;
         }
+
 
         private class OpenCloseMap
         {

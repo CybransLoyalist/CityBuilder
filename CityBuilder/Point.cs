@@ -1,3 +1,5 @@
+using System;
+
 namespace CityBuilding
 {
     public struct Point : IPoint
@@ -9,5 +11,10 @@ namespace CityBuilding
         }
         public int X { get; }
         public int Y { get; }
+
+        public static double Distance(IPoint start, IPoint end)
+        {
+            return Math.Sqrt((start.X - end.X) * (start.X - end.X) + (start.Y - end.Y) * (start.Y - end.Y));
+        }
     }
 }
