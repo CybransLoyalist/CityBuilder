@@ -1,6 +1,8 @@
+using SettlersEngine;
+
 namespace CityBuilding
 {
-    public interface ITile
+    public interface ITile : IPathNode
     {
         TileState TileState { get; set; }
     }

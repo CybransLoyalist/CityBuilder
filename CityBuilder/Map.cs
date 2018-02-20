@@ -37,6 +37,11 @@ namespace CityBuilding
             }
         }
 
+        public ITile[,] GetTilesArray()
+        {
+            return _tiles;
+        }
+
         public virtual ITile this[int x, int y] => _tiles[x, y];
 
         public IEnumerable<ITile> Tiles
@@ -54,6 +59,8 @@ namespace CityBuilding
         }
 
         public IDictionary<IBuilding, IEnumerable<ITile>> BuildingsTiles { get; set; } = new Dictionary<IBuilding, IEnumerable<ITile>>();
+
+        public IDictionary<ITile, IBuilding> TileBuildings { get; } = new Dictionary<ITile, IBuilding>();
 
         public IEnumerable<ITile> GetNeighboursOf(ITile tile, NeighbourMode neighbourMode)
         {
@@ -105,17 +112,7 @@ namespace CityBuilding
 
         public IBuilding GetBuildingAtTile(ITile tile)
         {
-            foreach (var locationsOfBuilding in LocationsOfBuildings)
-            {
-                var building = locationsOfBuilding.Value;
-                var allTilesOfBuilding = BuildingsTiles[building];
-                if (allTilesOfBuilding.Contains(tile))
-                {
-                    return building;
-                }
-            }
-
-            return null;
+            return TileBuildings[tile];
         }
     }
 }

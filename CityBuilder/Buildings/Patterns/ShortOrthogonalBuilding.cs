@@ -12,10 +12,11 @@ namespace CityBuilder.Buildings
 
         public override IList<ITilePattern> TilePatterns => new List<ITilePattern>
         {
-            new TilePattern(new Point(0, 0)),
+
+            new TilePattern(new Point(0,0), true),
             new TilePattern(new Point(0, 1)),
+            new TilePattern(new Point(1, 0)),
             new TilePattern(new Point(1, 1)),
-            new TilePattern(new Point(1,0), true),
         };
     }
 }

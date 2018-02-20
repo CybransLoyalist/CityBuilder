@@ -48,6 +48,7 @@
     <Compile Include="Buildings\Direction.cs" />
     <Compile Include="Buildings\Patterns\LongOrthogonalBuilding.cs" />
     <Compile Include="BuildingTilesOnMapLocator.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="MapWithBuildingsFiller.cs" />
     <Compile Include="EmptyAreaGroup.cs" />
     <Compile Include="EmptyAreaGroupGetter.cs" />
@@ -61,10 +62,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Buildings\Patterns\SingleTileBuilding.cs" />
     <Compile Include="Buildings\Patterns\ShortOrthogonalBuilding.cs" />
+    <Compile Include="Util\PriorityQueue.cs" />
+    <Compile Include="Util\RandomEnum.cs" />
     <Compile Include="StreetsAppender.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="TilePattern.cs" />
     <Compile Include="TileState.cs" />
+    <Compile Include="Util\SpatialAStar.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

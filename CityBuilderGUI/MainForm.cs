@@ -18,10 +18,6 @@ namespace CityBuilderGUI
                 for (int j = 0; j < map.Height; j++)
                 {
                     var tile = map[i, j];
-                    if (tile.TileState == TileState.Full)
-                    {
-                        continue;
-                    }
                     var brush = new BrushForTileCreator().Create(tile, map);
                     var rectangle = new Rectangle(i * (TileSize + 1), j * (TileSize + 1), TileSize, TileSize);
 
@@ -98,7 +94,9 @@ namespace CityBuilderGUI
             new MapWithBuildingsFiller(
                 new EmptyAreaGroupGetter(),
                 new StreetsAppender(),
-                new AreaWithBuildingFiller()).FillMap(_map);
+                new AreaWithBuildingFiller(
+                    new BuildingTilesOnMapLocator(),
+                    new PathToStreetDrawer())).FillMap(_map);
             Refresh();
         }
 

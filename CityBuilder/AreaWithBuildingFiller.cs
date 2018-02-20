@@ -2,43 +2,74 @@
 using System.Collections.Generic;
 using System.Linq;
 using CityBuilder.Buildings;
+using CityBuilder.Extensions;
+using CityBuilder.Util;
 using CityBuilding;
+using SettlersEngine;
 
 namespace CityBuilder
 {
-    public static class RandomEnum
+    public class PathToStreetDrawer
     {
-        public static T Get<T>()
+        public void DrawPathToEdge(IMap map, IPoint placingPointOnMap)
         {
-            var values = Enum.GetValues(typeof(T));
-            Random random = new Random();
-            T result = (T) values.GetValue(random.Next(values.Length));
-            return result;
+            var astar = new SpatialAStar<ITile>(map.GetTilesArray());
+            var result = astar.Search(placingPointOnMap, map.GetLocationOf(map[20, 20]));
+            foreach (var tile in result)
+            {
+                tile.TileState = TileState.Street;
+            }
         }
     }
-
-    public static class ListExtensions
-    {
-        public static T Random<T>(this IList<T> list)
-        {
-            var max = list.Count - 1;
-            var index = new Random().Next(max);
-            return list[index];
-        }
-    }
-
     public class AreaWithBuildingFiller
     {
+        private readonly BuildingTilesOnMapLocator _buildingTilesOnMapLocator;
+        private readonly PathToStreetDrawer _pathToStreetDrawer;
+
+        public AreaWithBuildingFiller(
+            BuildingTilesOnMapLocator buildingTilesOnMapLocator,
+            PathToStreetDrawer pathToStreetDrawer)
+        {
+            _buildingTilesOnMapLocator = buildingTilesOnMapLocator;
+            _pathToStreetDrawer = pathToStreetDrawer;
+        }
+
         public void Fill(IMap map, EmptyAreaGroup emptyAreaGroup)
         {
-            var angle = RandomEnum.Get<Angle>();
-            var building = new ShortOrthogonalBuilding(Guid.NewGuid(), angle);
+            IPoint placingPointOnMap;
+            IBuilding building;
+            bool canLocate;
+            Dictionary<ITile, List<Angle>> tilesToBeChecked = new Dictionary<ITile, List<Angle>>();
 
-            var placingPointOnMap = map.GetLocationOf(emptyAreaGroup.Tiles.Random());
 
-             new BuildingTilesOnMapLocator().Locate(map, building, placingPointOnMap);
-            
-            map.LocationsOfBuildings.Add(placingPointOnMap, building);
+            foreach (var tile in emptyAreaGroup.Tiles)
+            {
+                tilesToBeChecked.Add(tile,
+                    new List<Angle> {Angle.Ninety, Angle.OneHundredEighty, Angle.TwoHundredSeventy, Angle.Zero});
+            }
+
+            do
+            {
+                var randomTile = tilesToBeChecked.Select(a => a.Key).ToList().Random();
+                var angle = tilesToBeChecked[randomTile].Random();
+                building = new LongOrthogonalBuilding(Guid.NewGuid(), angle);
+                placingPointOnMap = map.GetLocationOf(randomTile);
+
+                tilesToBeChecked[randomTile].Remove(angle);
+                if (tilesToBeChecked[randomTile].Count == 0)
+                {
+                    tilesToBeChecked.Remove(randomTile);
+                }
+
+                canLocate = _buildingTilesOnMapLocator.CanLocate(map, building, placingPointOnMap);
+            } while (!canLocate && tilesToBeChecked.Any());
+
+            if (canLocate)
+            {
+                _buildingTilesOnMapLocator.Locate(map, building, placingPointOnMap);
+                _pathToStreetDrawer.DrawPathToEdge(map, placingPointOnMap);
+                map.LocationsOfBuildings.Add(placingPointOnMap, building);
+            }
         }
     }
 }
