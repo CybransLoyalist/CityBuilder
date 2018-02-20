@@ -16,13 +16,10 @@ namespace CityBuilderGUI
                     color = Color.Gray;
                     break;
                 case TileState.Empty:
-                    color = Color.LightYellow;
+                    color = Color.Black;
                     break;
                 case TileState.Street:
                     color = Color.SaddleBrown;
-                    break;
-                case TileState.Door:
-                    color = Color.SandyBrown;
                     break;
                 case TileState.Full:
                     var guid = map.GetBuildingAtTile(tile).Guid;

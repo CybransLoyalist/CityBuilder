@@ -3,10 +3,11 @@
     public class Tile : ITile
     {
         public TileState TileState { get; set; }
+        public bool IsBlocked { get; set; }
 
         public bool IsWalkable()
         {
-            return TileState != TileState.Blocked && TileState != TileState.Door && TileState != TileState.Full;
+            return !IsBlocked && TileState != TileState.Blocked &&  TileState != TileState.Full;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace CityBuilder
 
         public virtual void PlaceBuildingOn(IMap map, IBuilding building, Point placingPointOnMap, Angle angle)
         {
-            map.LocationsOfBuildings.Add(placingPointOnMap, building);
+            //map.LocationsOfBuildings.Add(placingPointOnMap, building);
 
             _buildingTilesOnMapLocator.Locate(map, building, placingPointOnMap);
         }

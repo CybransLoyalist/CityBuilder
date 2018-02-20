@@ -5,7 +5,8 @@ using CityBuilding;
 namespace CityBuilder.Buildings
 {
     public class SingleTileBuilding : Building
-    {
+    {  
+        
         public SingleTileBuilding(Guid guid, Angle angle) : base(guid, angle)
         {
         }

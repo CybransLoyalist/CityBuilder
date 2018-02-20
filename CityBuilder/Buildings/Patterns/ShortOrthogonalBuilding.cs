@@ -6,6 +6,7 @@ namespace CityBuilder.Buildings
 {
     public class ShortOrthogonalBuilding : Building
     {
+        
         public ShortOrthogonalBuilding(Guid guid, Angle angle) : base(guid, angle)
         {
         }

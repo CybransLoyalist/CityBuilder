@@ -6,6 +6,5 @@
         Empty,
         Full,
         Street,
-        Door
     }
 }

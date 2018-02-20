@@ -17,23 +17,56 @@ namespace CityBuilder
         public ITilePattern TilePattern { get; set; }
         public ITile Tile { get; set; }
     }
+
     public class BuildingTilesOnMapLocator
     {
         public virtual void Locate(IMap map, IBuilding building, IPoint placingPointOnMap)
         {
-            var tilesOfBuilding = new List<ITile>();
+            try
+            {
+                var tilesOfBuilding = new List<ITile>();
+                foreach (var tilePattern in building.TilePatterns) //todo refactor with below
+                {
+                    var buildingTilePoint = Transform(placingPointOnMap, tilePattern.Transformation, building.Angle);
+                    var tile = map[buildingTilePoint.X, buildingTilePoint.Y];
+
+                    tile.TileState = tilePattern.IsDoor ? TileState.Street : TileState.Full;
+                    if (!tilePattern.IsDoor)
+                    {
+                        tilesOfBuilding.Add(tile);
+
+                        if (map.TileBuildings.ContainsKey(tile))
+                        {
+                        }
+
+
+                        map.TileBuildings.Add(tile, building);
+                    }
+                }
+                map.BuildingsTiles.Add(building, tilesOfBuilding.Where(a => a.TileState != TileState.Street));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public virtual void LocateVirtual(IMap map, IBuilding building, IPoint placingPointOnMap)
+        {
+            //  var tilesOfBuilding = new List<ITile>();
             foreach (var tilePattern in building.TilePatterns) //todo refactor with below
             {
                 var buildingTilePoint = Transform(placingPointOnMap, tilePattern.Transformation, building.Angle);
                 var tile = map[buildingTilePoint.X, buildingTilePoint.Y];
-                tilesOfBuilding.Add(tile);
-                tile.TileState = tilePattern.IsDoor ? TileState.Door : TileState.Full;
+                // tilesOfBuilding.Add(tile);
+                tile.IsBlocked = true;
 
-                map.TileBuildings.Add(tile, building);
+                // map.TileBuildings.Add(tile, building);
             }
-            map.BuildingsTiles.Add(building, tilesOfBuilding);
+            // map.BuildingsTiles.Add(building, tilesOfBuilding);
         }
-        
+
         private static Point Transform(IPoint placingPointOnMap, IPoint transformation, Angle angle)
         {
             var rotatedTransformation = RotatePoint(transformation, angle);
@@ -58,7 +91,6 @@ namespace CityBuilder
                 default:
                     throw new Exception();
             }
-
         }
 
         public bool CanLocate(IMap map, IBuilding building, IPoint placingPointOnMap)

@@ -10,7 +10,7 @@ namespace CityBuilding
         int Width { get;  }
         int Height { get;  }
         ITile this[int x, int y] { get; }
-        Dictionary<IPoint, IBuilding> LocationsOfBuildings { get; }
+       // Dictionary<IPoint, IBuilding> LocationsOfBuildings { get; }
         IEnumerable<ITile> Tiles { get; }
         IDictionary<IBuilding, IEnumerable<ITile>> BuildingsTiles { get; set; }
         IDictionary<ITile, IBuilding> TileBuildings { get; }

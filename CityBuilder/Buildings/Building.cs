@@ -15,5 +15,13 @@ namespace CityBuilder.Buildings
         public Guid Guid { get; }
         public abstract IList<ITilePattern> TilePatterns { get; }
         public Angle Angle { get;  }
+
+        public static IList<Type> Types { get; set; } = new List<Type>
+        {
+            typeof(SquareBuilding),
+            typeof(LongOrthogonalBuilding),
+            typeof(ShortOrthogonalBuilding),
+            typeof(SingleTileBuilding),
+        };
     }
 }
