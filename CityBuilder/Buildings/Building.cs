@@ -18,6 +18,7 @@ namespace CityBuilder.Buildings
 
         public static IList<Type> Types { get; set; } = new List<Type>
         {
+           // typeof(CourtyardBuilding),
             typeof(SquareBuilding),
             typeof(LongOrthogonalBuilding),
             typeof(ShortOrthogonalBuilding),

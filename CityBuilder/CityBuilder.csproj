@@ -46,7 +46,9 @@
     <Compile Include="BuildingOnMapPlacer.cs" />
     <Compile Include="Buildings\Building.cs" />
     <Compile Include="Buildings\Direction.cs" />
+    <Compile Include="Buildings\Patterns\CourtyardBuilding.cs" />
     <Compile Include="Buildings\Patterns\LongOrthogonalBuilding.cs" />
+    <Compile Include="Buildings\Patterns\SquareBuilding.cs" />
     <Compile Include="BuildingTilesOnMapLocator.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="MapWithBuildingsFiller.cs" />
