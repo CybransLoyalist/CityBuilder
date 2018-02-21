@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using CityBuilder.Buildings;
+using CityBuilding;
 
-namespace CityBuilding
+namespace CityBuilder.Buildings
 {
     public class TilePattern : ITilePattern
     {
@@ -17,6 +16,6 @@ namespace CityBuilding
         }
 
         public IPoint Transformation { get; set; }
-        public bool IsDoor { get; set; }
+        public bool IsDoor { get; set; } //todo this is wrong since only DoorTilePattern is door
     }
 }

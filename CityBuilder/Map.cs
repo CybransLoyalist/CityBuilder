@@ -17,7 +17,6 @@ namespace CityBuilding
         private readonly ITile[,] _tiles;
         public int Width { get; }
         public int Height { get; }
-        public Dictionary<IPoint, IBuilding> LocationsOfBuildings { get; } = new Dictionary<IPoint, IBuilding>();
         private readonly Dictionary<ITile, IPoint> _tilesLocations = new Dictionary<ITile, IPoint>();
 
 

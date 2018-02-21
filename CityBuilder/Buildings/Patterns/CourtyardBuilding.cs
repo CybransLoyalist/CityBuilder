@@ -13,7 +13,7 @@ namespace CityBuilder.Buildings
 
         public override IList<ITilePattern> TilePatterns => new List<ITilePattern>
         {
-            new TilePattern(new Point(0, 0), true),
+            new DoorTilePattern(),
             new TilePattern(new Point(0,1)),
             new TilePattern(new Point(0,2)),
             new TilePattern(new Point(0,3)),

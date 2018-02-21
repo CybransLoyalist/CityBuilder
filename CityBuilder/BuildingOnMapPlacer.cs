@@ -3,7 +3,7 @@ using CityBuilding;
 
 namespace CityBuilder
 {
-    public class BuildingOnMapPlacer
+    public class BuildingOnMapPlacer //todo this class is unnecessary
     {
         private readonly BuildingTilesOnMapLocator _buildingTilesOnMapLocator;
 
@@ -14,8 +14,6 @@ namespace CityBuilder
 
         public virtual void PlaceBuildingOn(IMap map, IBuilding building, Point placingPointOnMap, Angle angle)
         {
-            //map.LocationsOfBuildings.Add(placingPointOnMap, building);
-
             _buildingTilesOnMapLocator.Locate(map, building, placingPointOnMap);
         }
     }

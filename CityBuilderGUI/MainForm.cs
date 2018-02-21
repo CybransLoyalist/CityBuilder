@@ -95,8 +95,7 @@ namespace CityBuilderGUI
                 new EmptyAreaGroupGetter(),
                 new StreetsAppender(),
                 new AreaWithBuildingFiller(
-                    new BuildingTilesOnMapLocator(),
-                    new PathToStreetDrawer())).FillMap(_map);
+                    new BuildingTilesOnMapLocator())).FillMap(_map);
             Refresh();
         }
 

@@ -46,6 +46,7 @@
     <Compile Include="BuildingOnMapPlacer.cs" />
     <Compile Include="Buildings\Building.cs" />
     <Compile Include="Buildings\Direction.cs" />
+    <Compile Include="Buildings\DoorTilePattern.cs" />
     <Compile Include="Buildings\Patterns\CourtyardBuilding.cs" />
     <Compile Include="Buildings\Patterns\LongOrthogonalBuilding.cs" />
     <Compile Include="Buildings\Patterns\SquareBuilding.cs" />
@@ -68,7 +69,7 @@
     <Compile Include="Util\RandomEnum.cs" />
     <Compile Include="StreetsAppender.cs" />
     <Compile Include="Tile.cs" />
-    <Compile Include="TilePattern.cs" />
+    <Compile Include="Buildings\TilePattern.cs" />
     <Compile Include="TileState.cs" />
     <Compile Include="Util\SpatialAStar.cs" />
   </ItemGroup>
