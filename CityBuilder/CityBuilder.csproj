@@ -45,6 +45,8 @@
     <Compile Include="AreaWithBuildingFiller.cs" />
     <Compile Include="BuildingOnMapPlacer.cs" />
     <Compile Include="Buildings\Building.cs" />
+    <Compile Include="Buildings\BuildingType.cs" />
+    <Compile Include="Buildings\BuildingTypesProvider.cs" />
     <Compile Include="Buildings\Direction.cs" />
     <Compile Include="Buildings\DoorTilePattern.cs" />
     <Compile Include="Buildings\Patterns\CourtyardBuilding.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="ITile.cs" />
     <Compile Include="Buildings\ITilePattern.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="NeighbourMode.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Buildings\Patterns\SingleTileBuilding.cs" />

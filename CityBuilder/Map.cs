@@ -6,19 +6,14 @@ using CityBuilder.Buildings;
 
 namespace CityBuilding
 {
-    public enum NeighbourMode
-    {
-        Orthogonal,
-        All
-    }
-
     public class Map : IMap
     {
         private readonly ITile[,] _tiles;
         public int Width { get; }
         public int Height { get; }
         private readonly Dictionary<ITile, IPoint> _tilesLocations = new Dictionary<ITile, IPoint>();
-
+        private readonly IDictionary<IBuilding, IEnumerable<ITile>> _buildingsTiles = new Dictionary<IBuilding, IEnumerable<ITile>>();
+        private readonly IDictionary<ITile, IBuilding> _tileBuildings = new Dictionary<ITile, IBuilding>();
 
         public Map(int height, int width)
         {
@@ -43,12 +38,12 @@ namespace CityBuilding
 
         public void AddBuilding(IBuilding building, IEnumerable<ITile> tilesOfBuilding)
         {
-            BuildingsTiles.Add(building, tilesOfBuilding);
+            _buildingsTiles.Add(building, tilesOfBuilding);
         }
 
         public void SetBuildingAtTile(ITile tile, IBuilding building)
         {
-            TileBuildings.Add(tile, building);
+            _tileBuildings.Add(tile, building);
         }
 
         public virtual ITile this[int x, int y] => _tiles[x, y];
@@ -69,17 +64,13 @@ namespace CityBuilding
 
         public IEnumerable<ITile> GetTilesOfBuilding(IBuilding building)
         {
-            return BuildingsTiles[building];
+            return _buildingsTiles[building];
         }
 
         public IEnumerable<IBuilding> GetBuildings()
         {
-            return BuildingsTiles.Keys;
+            return _buildingsTiles.Keys;
         }
-
-        public IDictionary<IBuilding, IEnumerable<ITile>> BuildingsTiles { get; set; } = new Dictionary<IBuilding, IEnumerable<ITile>>();
-
-        public IDictionary<ITile, IBuilding> TileBuildings { get; } = new Dictionary<ITile, IBuilding>();
 
         public IEnumerable<ITile> GetNeighboursOf(ITile tile, NeighbourMode neighbourMode)
         {
@@ -131,7 +122,7 @@ namespace CityBuilding
 
         public IBuilding GetBuildingAtTile(ITile tile)
         {
-            return TileBuildings[tile];
+            return _tileBuildings[tile];
         }
     }
 }

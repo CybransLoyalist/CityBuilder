@@ -11,7 +11,9 @@ namespace CityBuilder.Buildings
         {
         }
 
-        public override IList<ITilePattern> TilePatterns => new List<ITilePattern>
+        public override IList<ITilePattern> TilePatterns => Pattern;
+
+        public static IList<ITilePattern> Pattern => new List<ITilePattern>
         {
             new DoorTilePattern(),
             new TilePattern(new Point(0, 1)),

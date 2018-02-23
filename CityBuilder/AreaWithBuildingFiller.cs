@@ -21,9 +21,11 @@ namespace CityBuilder
 
         public void Fill(IMap map, EmptyAreaGroup emptyAreaGroup)
         {
-            for (var index = 0; index < Building.Types.Count; index++)
+            var buildingTypesBySize = BuildingTypesProvider.BuildingTypes.GroupBy(a => a.OccupiedTilesCount).OrderByDescending(a => a.Key);
+            
+            for(int index = 0; index < buildingTypesBySize.Count(); ++index)
             {
-                var buildingType = Building.Types[index];
+                var buildingTypesOfEqualSize = buildingTypesBySize.ElementAt(index);
                 Dictionary<ITile, List<Angle>> tilesToBeChecked = new Dictionary<ITile, List<Angle>>();
                 foreach (var tile in emptyAreaGroup.Tiles.Where(
                     a => a.TileState != TileState.Blocked && a.TileState != TileState.Full))
@@ -35,7 +37,7 @@ namespace CityBuilder
                 {
                     var randomTile = tilesToBeChecked.Select(a => a.Key).ToList().Random();
                     var angle = tilesToBeChecked[randomTile].Random();
-                    var type = buildingType.Random();
+                    var type = buildingTypesOfEqualSize.ToList().Random().Type;
                     var building = Activator.CreateInstance(type, Guid.NewGuid(), angle) as IBuilding;
 
 
@@ -81,7 +83,6 @@ namespace CityBuilder
                     }
                 }
 
-
             }
 
             var mapFillFactor2 = (decimal)emptyAreaGroup.Tiles.Count(a => a.TileState == TileState.Full) /
@@ -114,14 +115,4 @@ namespace CityBuilder
             return closestStreet;
         }
     }
-
-//    public class RandomBuildingCreator
-//    {
-//        public IBuilding Create(Angle angle)
-//        {
-//            var type = Building.Types.Random();
-//
-//            return Activator.CreateInstance(type, Guid.NewGuid(), angle) as IBuilding;
-//        }
-//    }
 }
