@@ -16,13 +16,12 @@ namespace CityBuilder.Buildings
         public abstract IList<ITilePattern> TilePatterns { get; }
         public Angle Angle { get;  }
 
-        public static IList<Type> Types { get; set; } = new List<Type>
+        public static IList<IList<Type>> Types { get; set; } = new List<IList<Type>>
         {
-           // typeof(CourtyardBuilding),
-            typeof(SquareBuilding),
-            typeof(LongOrthogonalBuilding),
-            typeof(ShortOrthogonalBuilding),
-            typeof(SingleTileBuilding),
+            new List<Type>{typeof(CourtyardBuilding)},
+            new List<Type>{typeof(LongOrthogonalBuilding),  typeof(SquareBuilding)},
+            new List<Type>{typeof(ShortOrthogonalBuilding) },
+            new List<Type>{typeof(SingleTileBuilding) },
         };
     }
 }

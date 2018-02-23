@@ -39,7 +39,7 @@ namespace CityBuilderTests
             _cut.AppendStreets(map, new List<EmptyAreaGroup>{emptyGroup});
 
             Assert.AreEqual(4, emptyGroup.Tiles.Count(a => a.TileState == TileState.Empty));
-            Assert.AreEqual(12, map.Tiles.Count(a => a.TileState == TileState.Street));
+            Assert.AreEqual(12, map.AllTiles.Count(a => a.TileState == TileState.Street));
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace CityBuilderTests
             Assert.AreEqual(4, firstEmptyGroup.Tiles.Count(a => a.TileState == TileState.Empty));
             Assert.AreEqual(3, secondEmptyGroup.Tiles.Count(a => a.TileState == TileState.Empty));
 
-            Assert.AreEqual(21, map.Tiles.Count(a => a.TileState == TileState.Street));
+            Assert.AreEqual(21, map.AllTiles.Count(a => a.TileState == TileState.Street));
         }
 
     }

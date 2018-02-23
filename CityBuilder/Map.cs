@@ -41,9 +41,19 @@ namespace CityBuilding
             return _tiles;
         }
 
+        public void AddBuilding(IBuilding building, IEnumerable<ITile> tilesOfBuilding)
+        {
+            BuildingsTiles.Add(building, tilesOfBuilding);
+        }
+
+        public void SetBuildingAtTile(ITile tile, IBuilding building)
+        {
+            TileBuildings.Add(tile, building);
+        }
+
         public virtual ITile this[int x, int y] => _tiles[x, y];
 
-        public IEnumerable<ITile> Tiles
+        public IEnumerable<ITile> AllTiles
         {
             get
             {
@@ -55,6 +65,16 @@ namespace CityBuilding
                     }
                 }
             }
+        }
+
+        public IEnumerable<ITile> GetTilesOfBuilding(IBuilding building)
+        {
+            return BuildingsTiles[building];
+        }
+
+        public IEnumerable<IBuilding> GetBuildings()
+        {
+            return BuildingsTiles.Keys;
         }
 
         public IDictionary<IBuilding, IEnumerable<ITile>> BuildingsTiles { get; set; } = new Dictionary<IBuilding, IEnumerable<ITile>>();

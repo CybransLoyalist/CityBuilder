@@ -1,21 +1,22 @@
 using System.Collections.Generic;
-using System.Drawing;
 using CityBuilder.Buildings;
+using CityBuilding;
 
-namespace CityBuilding
+namespace CityBuilder
 {
-
     public interface IMap
     {
-        int Width { get;  }
-        int Height { get;  }
+        int Width { get; }
+        int Height { get; }
         ITile this[int x, int y] { get; }
-        IEnumerable<ITile> Tiles { get; }
-        IDictionary<IBuilding, IEnumerable<ITile>> BuildingsTiles { get; set; }
-        IDictionary<ITile, IBuilding> TileBuildings { get; }
+        IEnumerable<ITile> AllTiles { get; }
+        ITile[,] GetTilesArray();
+        IEnumerable<ITile> GetTilesOfBuilding(IBuilding building);
+        IEnumerable<IBuilding> GetBuildings();
         IEnumerable<ITile> GetNeighboursOf(ITile tile, NeighbourMode neighbourMode);
         IPoint GetLocationOf(ITile tile);
         IBuilding GetBuildingAtTile(ITile tile);
-        ITile[,] GetTilesArray();
+        void AddBuilding(IBuilding building, IEnumerable<ITile> tiles);
+        void SetBuildingAtTile(ITile tile, IBuilding building);
     }
 }

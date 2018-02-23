@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CityBuilder;
 
 namespace CityBuilding
 {
@@ -8,7 +9,7 @@ namespace CityBuilding
         public IList<EmptyAreaGroup> Get(IMap map)
         {
 
-            var emptyTiles = map.Tiles.Where(a => a.TileState == TileState.Empty).ToList();
+            var emptyTiles = map.AllTiles.Where(a => a.TileState == TileState.Empty).ToList();
             return !emptyTiles.Any() ?
                 new List<EmptyAreaGroup>() :
                 BuildGroups(map, emptyTiles);

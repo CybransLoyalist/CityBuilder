@@ -35,15 +35,17 @@ namespace CityBuilder
                     {
                         tilesOfBuilding.Add(tile);
 
-                        if (map.TileBuildings.ContainsKey(tile))
-                        {
-                        }
+//                        if (map.TileBuildings.ContainsKey(tile))
+//                        {
+//                        }
 
+                        map.SetBuildingAtTile(tile, building);
 
-                        map.TileBuildings.Add(tile, building);
+                     //   map.TileBuildings.Add(tile, building);
                     }
                 }
-                map.BuildingsTiles.Add(building, tilesOfBuilding.Where(a => a.TileState != TileState.Street));
+
+                map.AddBuilding(building, tilesOfBuilding.Where(a => a.TileState != TileState.Street));
             }
             catch (Exception e)
             {
