@@ -6,5 +6,6 @@ namespace CityBuilding
     {
         TileState TileState { get; set; }
         bool IsBlocked { get; set; }
+        bool CanBuildingEntranceBePlacedOn();
     }
 }

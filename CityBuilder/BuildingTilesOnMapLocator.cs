@@ -28,7 +28,7 @@ namespace CityBuilder
             map.AddBuilding(building, tilesOfBuilding.Where(a => a.TileState != TileState.Street));
         }
 
-        public virtual void LocateVirtual(IMap map, IBuilding building, IPoint placingPointOnMap)
+        public virtual void BlockBuildingArea(IMap map, IBuilding building, IPoint placingPointOnMap)
         {
             foreach (var tilePattern in building.TilePatterns) //todo refactor with below
             {

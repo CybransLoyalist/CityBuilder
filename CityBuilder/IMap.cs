@@ -18,5 +18,6 @@ namespace CityBuilder
         IBuilding GetBuildingAtTile(ITile tile);
         void AddBuilding(IBuilding building, IEnumerable<ITile> tiles);
         void SetBuildingAtTile(ITile tile, IBuilding building);
+        void UnblockAllTiles();
     }
 }

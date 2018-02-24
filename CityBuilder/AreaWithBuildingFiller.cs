@@ -22,50 +22,42 @@ namespace CityBuilder
 
         public void Fill(IMap map, EmptyAreaGroup emptyAreaGroup)
         {
-            var buildingTypesBySize = BuildingTypesProvider.BuildingTypes.GroupBy(a => a.OccupiedTilesCount).OrderByDescending(a => a.Key);
-            
-            for(int index = 0; index < buildingTypesBySize.Count(); ++index)
-            {
-                var buildingTypesOfEqualSize = buildingTypesBySize.ElementAt(index);
-                Dictionary<ITile, List<Angle>> tilesToBeChecked = new Dictionary<ITile, List<Angle>>();
-                foreach (var tile in emptyAreaGroup.Tiles.Where(
-                    a => a.TileState != TileState.Blocked && a.TileState != TileState.Full))
-                {
-                    tilesToBeChecked.Add(tile,
-                        new List<Angle> {Angle.Ninety, Angle.OneHundredEighty, Angle.TwoHundredSeventy, Angle.Zero});
-                }
-                while (tilesToBeChecked.Any())
-                {
-                    var randomTile = tilesToBeChecked.Select(a => a.Key).ToList().Random();
-                    var angle = tilesToBeChecked[randomTile].Random();
-                    var type = buildingTypesOfEqualSize.ToList().Random().Type;
-                    var building = Activator.CreateInstance(type, Guid.NewGuid(), angle) as IBuilding;
+            var buildingTypesBySize = BuildingTypesProvider.GetGroupedBySize();
+            var astar = new SpatialAStar<ITile>(map.GetTilesArray());
 
+            for (var index = 0; index < buildingTypesBySize.Count; ++index)
+            {
+                var buildingTypesOfEqualSize = buildingTypesBySize[index];
+                var tilesAndAnglesToBeChecked = GetTilesAndAnglesToBeCheckedIfNewBuildingCanBePlacedOnThem(emptyAreaGroup);
+                while (tilesAndAnglesToBeChecked.Any())
+                {
+                    var randomTile = tilesAndAnglesToBeChecked.Select(a => a.Key).ToList().Random();
+                    var angle = tilesAndAnglesToBeChecked[randomTile].Random();
+                    var type = buildingTypesOfEqualSize.Item2.Random();
+                    var building = Activator.CreateInstance(type, Guid.NewGuid(), angle) as IBuilding;
 
                     var placingPointOnMap = map.GetLocationOf(randomTile);
 
-                    tilesToBeChecked[randomTile].Remove(angle);
-                    if (tilesToBeChecked[randomTile].Count == 0)
+                    tilesAndAnglesToBeChecked[randomTile].Remove(angle);
+                    if (tilesAndAnglesToBeChecked[randomTile].Count == 0)
                     {
-                        tilesToBeChecked.Remove(randomTile);
+                        tilesAndAnglesToBeChecked.Remove(randomTile);
                     }
 
                     var canLocate = _buildingTilesOnMapLocator.CanLocate(map, building, placingPointOnMap);
 
                     if (canLocate)
                     {
-                        _buildingTilesOnMapLocator.LocateVirtual(map, building, placingPointOnMap);
-                        var astar = new SpatialAStar<ITile>(map.GetTilesArray());
+                        _buildingTilesOnMapLocator.BlockBuildingArea(map, building, placingPointOnMap);
+       
 
                         var closestStreet = GetClosestStreet(placingPointOnMap, map);
 
                         var result = astar.Search(placingPointOnMap, closestStreet);
                         if (result != null)
                         {
-                            foreach (var tile in map.AllTiles.Where(a => a.IsBlocked))
-                            {
-                                tile.IsBlocked = false;
-                            }
+                            map.UnblockAllTiles();
+                           
                             _buildingTilesOnMapLocator.Locate(map, building, placingPointOnMap);
                             foreach (var tile in result)
                             {
@@ -78,7 +70,7 @@ namespace CityBuilder
                     var mapFillFactor = (decimal)emptyAreaGroup.Tiles.Count(a => a.TileState == TileState.Full) /
                                         (decimal)emptyAreaGroup.Tiles.Count();
 
-                    if (mapFillFactor > (decimal)(index + 1)/ 4)
+                    if (mapFillFactor > (decimal)(index + 1) / 4)
                     {
                         break;
                     }
@@ -96,7 +88,19 @@ namespace CityBuilder
             var singleSq = map.GetBuildings().Count(a => a is SingleTileBuilding);
         }
 
-            private IPoint GetClosestStreet(IPoint start, IMap map)
+        private static Dictionary<ITile, List<Angle>> GetTilesAndAnglesToBeCheckedIfNewBuildingCanBePlacedOnThem(EmptyAreaGroup emptyAreaGroup)
+        {
+            Dictionary<ITile, List<Angle>> tilesToBeChecked = new Dictionary<ITile, List<Angle>>();
+            foreach (var tile in emptyAreaGroup.Tiles.Where(a => a.CanBuildingEntranceBePlacedOn()))
+            {
+                tilesToBeChecked.Add(tile,
+                    new List<Angle> { Angle.Ninety, Angle.OneHundredEighty, Angle.TwoHundredSeventy, Angle.Zero });
+            }
+
+            return tilesToBeChecked;
+        }
+
+        private IPoint GetClosestStreet(IPoint start, IMap map)
         {
             var streetTiles = map.AllTiles.Where(a => a.TileState == TileState.Street).ToList();
 

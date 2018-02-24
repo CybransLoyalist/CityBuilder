@@ -4,6 +4,10 @@
     {
         public TileState TileState { get; set; }
         public bool IsBlocked { get; set; }
+        public bool CanBuildingEntranceBePlacedOn()
+        {
+            return TileState != TileState.Blocked && TileState != TileState.Full;
+        }
 
         public bool IsWalkable()
         {

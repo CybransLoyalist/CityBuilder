@@ -46,6 +46,14 @@ namespace CityBuilding
             _tileBuildings.Add(tile, building);
         }
 
+        public void UnblockAllTiles()
+        {
+            foreach (var tile in AllTiles.Where(a => a.IsBlocked))
+            {
+                tile.IsBlocked = false;
+            }
+        }
+
         public virtual ITile this[int x, int y] => _tiles[x, y];
 
         public IEnumerable<ITile> AllTiles
