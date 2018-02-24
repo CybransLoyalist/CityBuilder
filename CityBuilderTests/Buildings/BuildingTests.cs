@@ -1,5 +1,7 @@
 using System;
 using CityBuilder.Buildings;
+using CityBuilder.Buildings.Patterns;
+using CityBuilding;
 using NUnit.Framework;
 
 namespace CityBuilderTests.Buildings
@@ -11,16 +13,15 @@ namespace CityBuilderTests.Buildings
         public void ConstructorShallSetGuid()
         {
             var guid = Guid.NewGuid();
-            var building = new SingleTileBuilding(guid);
+            var building = new SingleTileBuilding(guid, Angle.Zero);
             Assert.AreEqual(guid, building.Guid);
         }
 
         [Test]
-        public void ConstructorShallSetEmptyTilesList()
+        public void ConstructorShallSetAngle()
         {
-            var building = new ShortOrthogonalBuilding(Guid.NewGuid());
-            Assert.NotNull(building.Tiles);
-            Assert.AreEqual(0, building.Tiles.Count);
+            var building = new ShortOrthogonalBuilding(Guid.NewGuid(), Angle.Zero);
+            Assert.AreEqual(Angle.Zero, building.Angle);
         }
     }
 }

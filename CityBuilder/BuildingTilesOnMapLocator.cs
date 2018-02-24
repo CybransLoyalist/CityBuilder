@@ -6,67 +6,36 @@ using CityBuilding;
 
 namespace CityBuilder
 {
-    public class TilePatternLocation
-    {
-        public TilePatternLocation(ITile tile, ITilePattern tilePattern)
-        {
-            Tile = tile;
-            TilePattern = tilePattern;
-        }
-
-        public ITilePattern TilePattern { get; set; }
-        public ITile Tile { get; set; }
-    }
-
     public class BuildingTilesOnMapLocator
     {
         public virtual void Locate(IMap map, IBuilding building, IPoint placingPointOnMap)
         {
-            try
-            {
-                var tilesOfBuilding = new List<ITile>();
-                foreach (var tilePattern in building.TilePatterns) //todo refactor with below
-                {
-                    var buildingTilePoint = Transform(placingPointOnMap, tilePattern.Transformation, building.Angle);
-                    var tile = map[buildingTilePoint.X, buildingTilePoint.Y];
-
-                    tile.TileState = tilePattern.IsDoor ? TileState.Street : TileState.Full;
-                    if (!tilePattern.IsDoor)
-                    {
-                        tilesOfBuilding.Add(tile);
-
-//                        if (map.TileBuildings.ContainsKey(tile))
-//                        {
-//                        }
-
-                        map.SetBuildingAtTile(tile, building);
-
-                     //   map.TileBuildings.Add(tile, building);
-                    }
-                }
-
-                map.AddBuilding(building, tilesOfBuilding.Where(a => a.TileState != TileState.Street));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
-
-        public virtual void LocateVirtual(IMap map, IBuilding building, IPoint placingPointOnMap)
-        {
-            //  var tilesOfBuilding = new List<ITile>();
+            var tilesOfBuilding = new List<ITile>();
             foreach (var tilePattern in building.TilePatterns) //todo refactor with below
             {
                 var buildingTilePoint = Transform(placingPointOnMap, tilePattern.Transformation, building.Angle);
                 var tile = map[buildingTilePoint.X, buildingTilePoint.Y];
-                // tilesOfBuilding.Add(tile);
-                tile.IsBlocked = true;
 
-                // map.TileBuildings.Add(tile, building);
+                tile.TileState = tilePattern.IsDoor ? TileState.Street : TileState.Full;
+                if (!tilePattern.IsDoor)
+                {
+                    tilesOfBuilding.Add(tile);
+
+                    map.SetBuildingAtTile(tile, building);
+                }
             }
-            // map.BuildingsTiles.Add(building, tilesOfBuilding);
+
+            map.AddBuilding(building, tilesOfBuilding.Where(a => a.TileState != TileState.Street));
+        }
+
+        public virtual void LocateVirtual(IMap map, IBuilding building, IPoint placingPointOnMap)
+        {
+            foreach (var tilePattern in building.TilePatterns) //todo refactor with below
+            {
+                var buildingTilePoint = Transform(placingPointOnMap, tilePattern.Transformation, building.Angle);
+                var tile = map[buildingTilePoint.X, buildingTilePoint.Y];
+                tile.IsBlocked = true;
+            }
         }
 
         private static Point Transform(IPoint placingPointOnMap, IPoint transformation, Angle angle)
@@ -118,6 +87,18 @@ namespace CityBuilder
             return nonDoorTiles.All(a => a.Tile.TileState == TileState.Empty) && (
                        doorTile.Tile.TileState != TileState.Blocked &&
                        doorTile.Tile.TileState != TileState.Full);
+        }
+
+        private class TilePatternLocation
+        {
+            public TilePatternLocation(ITile tile, ITilePattern tilePattern)
+            {
+                Tile = tile;
+                TilePattern = tilePattern;
+            }
+
+            public ITilePattern TilePattern { get; }
+            public ITile Tile { get; }
         }
     }
 }

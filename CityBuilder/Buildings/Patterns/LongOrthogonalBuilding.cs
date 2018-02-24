@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using CityBuilding;
 
-namespace CityBuilder.Buildings
+namespace CityBuilder.Buildings.Patterns
 {
     public class LongOrthogonalBuilding : Building
     {

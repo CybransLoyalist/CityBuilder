@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CityBuilder.Buildings;
+using CityBuilder.Buildings.Patterns;
 using CityBuilder.Extensions;
 using CityBuilding;
 using SettlersEngine;

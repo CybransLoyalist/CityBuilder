@@ -122,7 +122,9 @@ namespace CityBuilding
 
         public IBuilding GetBuildingAtTile(ITile tile)
         {
-            return _tileBuildings[tile];
+            return !_tileBuildings.ContainsKey(tile) 
+                ? null : 
+                _tileBuildings[tile];
         }
     }
 }
