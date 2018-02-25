@@ -80,6 +80,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AStarAlgorithm\AStarAlgorithm.csproj">
+      <Project>{22CF108F-CFFF-48E3-B113-3C64B94C4EE9}</Project>
+      <Name>AStarAlgorithm</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CityBuilder\CityBuilder.csproj">
       <Project>{96D2F87B-61D2-472A-A5B2-263B6F209D1D}</Project>
       <Name>CityBuilder</Name>

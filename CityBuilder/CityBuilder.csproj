@@ -76,13 +76,17 @@
     <Compile Include="Buildings\Patterns\ShortOrthogonalBuilding.cs" />
     <Compile Include="RandomBuildingLocationGenerator.cs" />
     <Compile Include="TileAnglesCombinations.cs" />
-    <Compile Include="Util\PriorityQueue.cs" />
     <Compile Include="Util\RandomEnum.cs" />
     <Compile Include="StreetsAppender.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Buildings\TilePattern.cs" />
     <Compile Include="TileState.cs" />
-    <Compile Include="Util\SpatialAStar.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AStarAlgorithm\AStarAlgorithm.csproj">
+      <Project>{22CF108F-CFFF-48E3-B113-3C64B94C4EE9}</Project>
+      <Name>AStarAlgorithm</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

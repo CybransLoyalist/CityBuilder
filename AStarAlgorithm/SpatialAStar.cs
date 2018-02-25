@@ -1,43 +1,11 @@
-﻿/*
-The MIT License
-
-Copyright (c) 2010 Christoph Husse
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using CityBuilding;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SettlersEngine
+namespace AStarAlgorithm
 {
-    public interface IPathNode
-    {
-        bool IsWalkable();
-    }
-
-    public interface IIndexedObject
-    {
-        int Index { get; set; }
-    }
-
     /// <summary>
     /// Uses about 50 MB for a 1024x1024 grid.
     /// </summary>
@@ -144,7 +112,7 @@ namespace SettlersEngine
         /// </summary>
         /// 
         /// 
-        public LinkedList<TPathNode> Search(IPoint inStartNode, IPoint inEndNode)
+        public LinkedList<TPathNode> Search(IPoint inStartNode, IPoint inEndNode, NeighbourClassification neighbourClassification)
         {
             PathNode startNode = m_SearchSpace[inStartNode.X, inStartNode.Y];
             PathNode endNode = m_SearchSpace[inEndNode.X, inEndNode.Y];
@@ -188,7 +156,7 @@ namespace SettlersEngine
 
                 if (x == endNode)
                 {
-                   // watch.Stop();
+                    // watch.Stop();
 
                     //elapsed.Add(watch.ElapsedMilliseconds);
 
@@ -202,7 +170,7 @@ namespace SettlersEngine
                 m_OpenSet.Remove(x);
                 m_ClosedSet.Add(x);
 
-                StoreNeighborNodes(x, neighborNodes);
+                StoreNeighborNodes(x, neighborNodes, neighbourClassification);
 
                 for (int i = 0; i < neighborNodes.Length; i++)
                 {
@@ -283,14 +251,14 @@ namespace SettlersEngine
                 result.AddLast(current_node.UserContext);
         }
 
-        private void StoreNeighborNodes(PathNode inAround, PathNode[] inNeighbors)
+        private void StoreNeighborNodes(PathNode inAround, PathNode[] inNeighbors, NeighbourClassification neighbourClassification)
         {
             int x = inAround.X;
             int y = inAround.Y;
 
-            if ((x > 0) && (y > 0))
+            if ((x > 0) && (y > 0) && neighbourClassification == NeighbourClassification.ByWallAndCorner)
             {
-                //inNeighbors[0] = m_SearchSpace[x - 1, y - 1];
+                inNeighbors[0] = m_SearchSpace[x - 1, y - 1];
             }
             else
                 inNeighbors[0] = null;
@@ -300,9 +268,9 @@ namespace SettlersEngine
             else
                 inNeighbors[1] = null;
 
-            if ((x < Width - 1) && (y > 0))
+            if ((x < Width - 1) && (y > 0) && neighbourClassification == NeighbourClassification.ByWallAndCorner)
             {
-                //inNeighbors[2] = m_SearchSpace[x + 1, y - 1];
+                inNeighbors[2] = m_SearchSpace[x + 1, y - 1];
             }
             else
                 inNeighbors[2] = null;
@@ -317,9 +285,9 @@ namespace SettlersEngine
             else
                 inNeighbors[4] = null;
 
-            if ((x > 0) && (y < Height - 1))
+            if ((x > 0) && (y < Height - 1) && neighbourClassification == NeighbourClassification.ByWallAndCorner)
             {
-                //inNeighbors[5] = m_SearchSpace[x - 1, y + 1];
+                inNeighbors[5] = m_SearchSpace[x - 1, y + 1];
             }
             else
                 inNeighbors[5] = null;
@@ -329,9 +297,9 @@ namespace SettlersEngine
             else
                 inNeighbors[6] = null;
 
-            if ((x < Width - 1) && (y < Height - 1))
+            if ((x < Width - 1) && (y < Height - 1) && neighbourClassification == NeighbourClassification.ByWallAndCorner)
             {
-                //inNeighbors[7] = m_SearchSpace[x + 1, y + 1];
+                inNeighbors[7] = m_SearchSpace[x + 1, y + 1];
             }
             else
                 inNeighbors[7] = null;
@@ -432,4 +400,5 @@ namespace SettlersEngine
             }
         }
     }
+
 }

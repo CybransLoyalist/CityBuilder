@@ -1,0 +1,5 @@
+C:\Users\CybransLoyalist\Documents\Visual Studio 2017\Projects\CityBuilder\AStarAlgorithm\bin\Debug\AStarAlgorithm.dll
+C:\Users\CybransLoyalist\Documents\Visual Studio 2017\Projects\CityBuilder\AStarAlgorithm\bin\Debug\AStarAlgorithm.pdb
+C:\Users\CybransLoyalist\Documents\Visual Studio 2017\Projects\CityBuilder\AStarAlgorithm\obj\Debug\AStarAlgorithm.csproj.CoreCompileInputs.cache
+C:\Users\CybransLoyalist\Documents\Visual Studio 2017\Projects\CityBuilder\AStarAlgorithm\obj\Debug\AStarAlgorithm.dll
+C:\Users\CybransLoyalist\Documents\Visual Studio 2017\Projects\CityBuilder\AStarAlgorithm\obj\Debug\AStarAlgorithm.pdb

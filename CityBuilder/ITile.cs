@@ -1,4 +1,4 @@
-using SettlersEngine;
+using AStarAlgorithm;
 
 namespace CityBuilding
 {

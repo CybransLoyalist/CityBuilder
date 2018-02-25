@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using AStarAlgorithm;
 using CityBuilder.Buildings;
 using CityBuilding;
-using SettlersEngine;
+using IPoint = CityBuilding.IPoint;
 
 namespace CityBuilder
 {
@@ -28,7 +29,10 @@ namespace CityBuilder
             _buildingOnMapLocator.BlockBuildingArea(_map, building, placingPointOnMap);
 
             var closestStreet = _closestStreetFinder.Find(_map, placingPointOnMap);
-            var pathToNearestStreet = _astar.Search(placingPointOnMap, closestStreet);
+            var pathToNearestStreet = _astar.Search(
+                new AStarAlgorithm.Point(placingPointOnMap.X, placingPointOnMap.Y),
+                new AStarAlgorithm.Point(closestStreet.X, closestStreet.Y),
+                NeighbourClassification.ByWall);
 
             _map.UnblockAllTiles();
 
