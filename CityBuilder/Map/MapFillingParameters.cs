@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CityBuilder
+namespace CityBuilder.Map
 {
     public class MapFillingParameters
     {

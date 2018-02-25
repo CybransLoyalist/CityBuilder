@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using CityBuilder;
 using CityBuilder.Buildings;
+using CityBuilder.Map.Tiles;
 
-namespace CityBuilding
+namespace CityBuilder.Map
 {
     public class Map : IMap
     {
@@ -100,7 +100,7 @@ namespace CityBuilding
             {
                 result.Add(this[tileLocation.X , tileLocation.Y + 1]);
             }
-            if (neighbourMode == NeighbourMode.All)
+            if (neighbourMode == NeighbourMode.ByWallAndCorners)
             {
                 if (tileLocation.X - 1 >= 0 && tileLocation.Y - 1 >= 0)
                 {

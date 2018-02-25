@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using CityBuilder.Extensions;
-using CityBuilding;
+using CityBuilder.Map.Tiles;
+using CityBuilder.Util;
 
-namespace CityBuilder
+namespace CityBuilder.AreaWithBuildingFilling
 {
     public struct TileAnglesCombinations
     {

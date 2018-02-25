@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using CityBuilder.Buildings;
-using CityBuilding;
+using CityBuilder.Map.Tiles;
 
-namespace CityBuilder
+namespace CityBuilder.Map
 {
     public interface IMap
     {

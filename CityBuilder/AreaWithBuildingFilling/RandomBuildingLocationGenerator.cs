@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using CityBuilder.Buildings;
 using CityBuilder.Extensions;
 
-namespace CityBuilder
+namespace CityBuilder.AreaWithBuildingFilling
 {
     public class RandomBuildingLocationGenerator
     {

@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CityBuilder.Buildings;
-using CityBuilding;
+using CityBuilder.Map;
+using CityBuilder.Map.Tiles;
+using CityBuilder.Util;
 
-namespace CityBuilder
+namespace CityBuilder.AreaWithBuildingFilling
 {
     public class BuildingOnMapLocator
     {

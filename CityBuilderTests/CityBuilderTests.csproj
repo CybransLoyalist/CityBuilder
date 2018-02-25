@@ -45,10 +45,10 @@
   <ItemGroup>
     <Compile Include="Buildings\BuildingTests.cs" />
     <Compile Include="Buildings\BuildingTilesOnMapLocator.cs" />
-    <Compile Include="EmptyAreaGroupGetterTests.cs" />
-    <Compile Include="MapTests.cs" />
+    <Compile Include="AreaWithBuildingFilling\EmptyAreaGroupGetterTests.cs" />
+    <Compile Include="Map\MapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StreetsAppenderTests.cs" />
+    <Compile Include="AreaWithBuildingFilling\StreetsAppenderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

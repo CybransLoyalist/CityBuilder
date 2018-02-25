@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using AStarAlgorithm;
 using CityBuilder.Buildings;
-using CityBuilding;
-using IPoint = CityBuilding.IPoint;
+using CityBuilder.Map;
+using CityBuilder.Map.Tiles;
+using IPoint = CityBuilder.Map.IPoint;
 
-namespace CityBuilder
+namespace CityBuilder.AreaWithBuildingFilling
 {
     public class PathToNearestStreetFromBuildingFinder
     {

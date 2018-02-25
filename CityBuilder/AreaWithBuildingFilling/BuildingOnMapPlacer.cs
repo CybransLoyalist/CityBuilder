@@ -1,7 +1,8 @@
 using CityBuilder.Buildings;
-using CityBuilding;
+using CityBuilder.Map;
+using CityBuilder.Util;
 
-namespace CityBuilder
+namespace CityBuilder.AreaWithBuildingFilling
 {
     public class BuildingOnMapPlacer //todo this class is unnecessary
     {

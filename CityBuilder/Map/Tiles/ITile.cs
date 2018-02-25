@@ -1,6 +1,6 @@
 using AStarAlgorithm;
 
-namespace CityBuilding
+namespace CityBuilder.Map.Tiles
 {
     public interface ITile : IPathNode
     {

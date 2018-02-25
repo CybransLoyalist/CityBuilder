@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using CityBuilder.Map.Tiles;
 
-namespace CityBuilding
+namespace CityBuilder.Map
 {
     public class EmptyAreaGroup
     {

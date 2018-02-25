@@ -1,7 +1,8 @@
 using CityBuilder.Buildings;
-using CityBuilding;
+using CityBuilder.Map;
+using CityBuilder.Map.Tiles;
 
-namespace CityBuilder
+namespace CityBuilder.AreaWithBuildingFilling
 {
     public class BuildingOnMapIfPossibleLocator
     {

@@ -1,4 +1,4 @@
-﻿namespace CityBuilding
+﻿namespace CityBuilder.Map
 {
     public interface IPoint
     {

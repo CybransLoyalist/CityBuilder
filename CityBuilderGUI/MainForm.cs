@@ -4,7 +4,9 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using CityBuilder;
-using CityBuilding;
+using CityBuilder.AreaWithBuildingFilling;
+using CityBuilder.Map;
+using CityBuilder.Map.Tiles;
 using Point = System.Drawing.Point;
 
 namespace CityBuilderGUI

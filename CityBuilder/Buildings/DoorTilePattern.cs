@@ -1,4 +1,4 @@
-using CityBuilding;
+using CityBuilder.Map;
 
 namespace CityBuilder.Buildings
 {

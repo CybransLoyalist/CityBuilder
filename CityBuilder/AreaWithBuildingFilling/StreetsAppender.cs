@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CityBuilder;
+using CityBuilder.Map;
+using CityBuilder.Map.Tiles;
 
-namespace CityBuilding
+namespace CityBuilder.AreaWithBuildingFilling
 {
     public class StreetsAppender
     {
@@ -13,7 +14,7 @@ namespace CityBuilding
             {
                 foreach (var tile in emptyAreaGroup.Tiles.Where(a => a.TileState == TileState.Empty))
                 {
-                    foreach (var neighbour in map.GetNeighboursOf(tile, NeighbourMode.All))
+                    foreach (var neighbour in map.GetNeighboursOf(tile, NeighbourMode.ByWallAndCorners))
                     {
                         if (!emptyAreaGroup.Tiles.Contains(neighbour))
                         {

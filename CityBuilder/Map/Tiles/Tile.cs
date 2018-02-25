@@ -1,4 +1,4 @@
-﻿namespace CityBuilding
+﻿namespace CityBuilder.Map.Tiles
 {
     public class Tile : ITile
     {

@@ -1,6 +1,6 @@
 using System;
 using CityBuilder.Buildings.Patterns;
-using CityBuilding;
+using CityBuilder.Util;
 using NUnit.Framework;
 
 namespace CityBuilderTests.Buildings

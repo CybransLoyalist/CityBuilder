@@ -1,5 +1,6 @@
 using CityBuilder;
-using CityBuilding;
+using CityBuilder.AreaWithBuildingFilling;
+using CityBuilder.Util;
 using NUnit.Framework;
 
 namespace CityBuilderTests.Buildings

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using CityBuilder;
-using CityBuilding;
+using CityBuilder.Map;
+using CityBuilder.Map.Tiles;
 
 namespace CityBuilderGUI
 {

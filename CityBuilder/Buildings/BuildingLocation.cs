@@ -1,8 +1,8 @@
 ﻿using System;
-using CityBuilder.Buildings;
-using CityBuilding;
+using CityBuilder.Map.Tiles;
+using CityBuilder.Util;
 
-namespace CityBuilder
+namespace CityBuilder.Buildings
 {
     public class BuildingLocation
     {

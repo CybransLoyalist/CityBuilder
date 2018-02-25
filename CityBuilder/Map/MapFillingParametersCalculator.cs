@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using CityBuilder.Buildings;
-using CityBuilding;
+using CityBuilder.Map.Tiles;
 
-namespace CityBuilder
+namespace CityBuilder.Map
 {
     public class MapFillingParametersCalculator
     {

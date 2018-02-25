@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using CityBuilding;
+using CityBuilder.Util;
 
 namespace CityBuilder.Buildings
 {

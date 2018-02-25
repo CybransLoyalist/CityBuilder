@@ -1,4 +1,4 @@
-﻿namespace CityBuilding
+﻿namespace CityBuilder.Util
 {
     public enum Angle
     {

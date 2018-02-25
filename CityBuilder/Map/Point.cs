@@ -1,6 +1,6 @@
 using System;
 
-namespace CityBuilding
+namespace CityBuilder.Map
 {
     public struct Point : IPoint
     {

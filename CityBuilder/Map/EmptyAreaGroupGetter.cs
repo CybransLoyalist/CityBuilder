@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CityBuilder;
+using CityBuilder.Map.Tiles;
 
-namespace CityBuilding
+namespace CityBuilder.Map
 {
     public class EmptyAreaGroupGetter
     {
@@ -44,7 +44,7 @@ namespace CityBuilding
 
         private static void AddNeighboursToGroup(IMap map, ITile currentTile, EmptyAreaGroup currentGroup)
         {
-            var neighboursOfCurrentTile = map.GetNeighboursOf(currentTile, NeighbourMode.Orthogonal).Where(a => a.TileState == TileState.Empty);
+            var neighboursOfCurrentTile = map.GetNeighboursOf(currentTile, NeighbourMode.ByWall).Where(a => a.TileState == TileState.Empty);
             foreach (var neighbour in neighboursOfCurrentTile)
             {
                 if (!currentGroup.Tiles.Contains(neighbour))

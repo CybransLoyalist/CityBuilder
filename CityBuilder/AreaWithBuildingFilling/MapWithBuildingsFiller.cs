@@ -1,6 +1,6 @@
-﻿using CityBuilding;
+﻿using CityBuilder.Map;
 
-namespace CityBuilder
+namespace CityBuilder.AreaWithBuildingFilling
 {
     public class MapWithBuildingsFiller
     {
