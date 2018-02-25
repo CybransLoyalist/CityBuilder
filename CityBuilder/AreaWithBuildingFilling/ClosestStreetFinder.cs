@@ -1,6 +1,6 @@
 using System.Linq;
-using CityBuilder.Map;
-using CityBuilder.Map.Tiles;
+using CityBuilder.MapModel;
+using CityBuilder.MapModel.Tiles;
 
 namespace CityBuilder.AreaWithBuildingFilling
 {

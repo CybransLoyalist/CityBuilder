@@ -1,26 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using CityBuilder.Buildings;
-using CityBuilder.Extensions;
+﻿using CityBuilder.Buildings;
 
 namespace CityBuilder.AreaWithBuildingFilling
 {
     public class RandomBuildingLocationGenerator
     {
         public BuildingLocation Generate(
-            TileAnglesCombinations tileAnglesCombinations, 
-            Tuple<int, IList<Type>> buildingTypesOfEqualSize)
+            TileAnglesCombinations tileAnglesCombinations,
+            BuildingTypesOfEqualSize buildingTypesOfEqualSize)
         {
             var randomTile = tileAnglesCombinations.GetRandomTile();
             var angle = tileAnglesCombinations.GetRandomAngleForTile(randomTile); 
-            var type = buildingTypesOfEqualSize.Item2.Random();
+            var type = buildingTypesOfEqualSize.GetRandomType();
 
-            return new BuildingLocation
-            {
-                Angle = angle,
-                Tile = randomTile,
-                Type = type
-            };
+            return new BuildingLocation(type, randomTile, angle);
         }
     }
 }

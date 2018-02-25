@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CityBuilder.Buildings;
-using CityBuilder.Map;
-using CityBuilder.Map.Tiles;
+using CityBuilder.MapModel;
+using CityBuilder.MapModel.Tiles;
 using CityBuilder.Util;
 
 namespace CityBuilder.AreaWithBuildingFilling
@@ -22,12 +22,10 @@ namespace CityBuilder.AreaWithBuildingFilling
                 if (!tilePattern.IsDoor)
                 {
                     tilesOfBuilding.Add(tile);
-
-                    map.SetBuildingAtTile(tile, building);
                 }
             }
 
-            map.AddBuilding(building, tilesOfBuilding.Where(a => a.TileState != TileState.Street));
+            map.AddBuilding(building, tilesOfBuilding.Where(a => a.TileState != TileState.Street).ToList());
         }
 
         public virtual void BlockBuildingArea(IMap map, IBuilding building, IPoint placingPointOnMap)
@@ -36,7 +34,7 @@ namespace CityBuilder.AreaWithBuildingFilling
             {
                 var buildingTilePoint = Transform(placingPointOnMap, tilePattern.Transformation, building.Angle);
                 var tile = map[buildingTilePoint.X, buildingTilePoint.Y];
-                tile.IsBlocked = true;
+                tile.IsTemporarilyBlocked = true;
             }
         }
 

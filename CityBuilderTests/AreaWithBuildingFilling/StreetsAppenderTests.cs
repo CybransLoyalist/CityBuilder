@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using CityBuilder.AreaWithBuildingFilling;
-using CityBuilder.Map;
-using CityBuilder.Map.Tiles;
+using CityBuilder.MapModel;
+using CityBuilder.MapModel.Tiles;
 using NUnit.Framework;
 
 namespace CityBuilderTests.AreaWithBuildingFilling
@@ -15,7 +15,7 @@ namespace CityBuilderTests.AreaWithBuildingFilling
         [Test]
         public void IfNoEmptyTilesArePresent_ResultShallBeEmptyListOfGroups()
         {
-            var map = new CityBuilder.Map.Map(4, 7);
+            var map = new CityBuilder.MapModel.Map(4, 7);
             var streetTiles = _cut.AppendStreets(map, new List<EmptyAreaGroup>());
             Assert.AreEqual(0, streetTiles.Count());
         }
@@ -23,7 +23,7 @@ namespace CityBuilderTests.AreaWithBuildingFilling
         [Test]
         public void SingleEmptyGroup_ShallBeSurroundedWithStreetTiles()
         {
-            var map = new CityBuilder.Map.Map(5, 7);
+            var map = new CityBuilder.MapModel.Map(5, 7);
             var emptyGroup = new EmptyAreaGroup
                 {Tiles = new List<ITile>
             {
@@ -47,7 +47,7 @@ namespace CityBuilderTests.AreaWithBuildingFilling
         [Test]
         public void IfTwoGroupsTouchByCorners_OneCornerShallBeRemoved_ToCreatePassage()
         {
-            var map = new CityBuilder.Map.Map(6,6);
+            var map = new CityBuilder.MapModel.Map(6,6);
             var firstEmptyGroup = new EmptyAreaGroup
             {
                 Tiles = new List<ITile>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CityBuilder.AreaWithBuildingFilling;
 using CityBuilder.Buildings.Patterns;
 
 namespace CityBuilder.Buildings
@@ -21,11 +22,11 @@ namespace CityBuilder.Buildings
             return new BuildingType {OccupiedTilesCount = pattern.Count - 1, Type = type};
         }
 
-        public static IList<Tuple<int, IList<Type>>> GetGroupedBySize()
+        public static IList<BuildingTypesOfEqualSize> GetGroupedBySize()
         {
-            return BuildingTypes.GroupBy(bt => bt.OccupiedTilesCount).
-                OrderByDescending(grouping => grouping.Key).
-                Select(grouping => new Tuple<int, IList<Type>>(grouping.Key, grouping.Select(b => b.Type).ToList())).ToList();
+            return BuildingTypes.GroupBy(bt => bt.OccupiedTilesCount).OrderByDescending(grouping => grouping.Key)
+                .Select(grouping => new BuildingTypesOfEqualSize( grouping.Select(b => b.Type).ToList(), grouping.Key))
+                .ToList();
         }
     }
 }

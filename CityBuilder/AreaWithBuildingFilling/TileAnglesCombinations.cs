@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using CityBuilder.Extensions;
-using CityBuilder.Map.Tiles;
+using CityBuilder.MapModel.Tiles;
 using CityBuilder.Util;
 
 namespace CityBuilder.AreaWithBuildingFilling
 {
-    public struct TileAnglesCombinations
+    public class TileAnglesCombinations
     {
         private readonly Dictionary<ITile, List<Angle>> _items;
         public TileAnglesCombinations(IEnumerable<ITile> tiles)
@@ -24,12 +24,12 @@ namespace CityBuilder.AreaWithBuildingFilling
             return _items.Any();
         }
 
-        public ITile GetRandomTile()
+        public virtual ITile GetRandomTile()
         {
             return _items.Select(a => a.Key).ToList().Random();
         }
 
-        public Angle GetRandomAngleForTile(ITile tile)
+        public virtual Angle GetRandomAngleForTile(ITile tile)
         {
             return _items[tile].Random();
         }

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using AStarAlgorithm;
 using CityBuilder.Buildings;
-using CityBuilder.Map;
-using CityBuilder.Map.Tiles;
-using IPoint = CityBuilder.Map.IPoint;
+using CityBuilder.MapModel;
+using CityBuilder.MapModel.Tiles;
+using IPoint = CityBuilder.MapModel.IPoint;
 
 namespace CityBuilder.AreaWithBuildingFilling
 {
@@ -35,7 +35,7 @@ namespace CityBuilder.AreaWithBuildingFilling
                 new AStarAlgorithm.Point(closestStreet.X, closestStreet.Y),
                 NeighbourClassification.ByWall);
 
-            _map.UnblockAllTiles();
+            _map.UnblockAllTemporarilyBlockedTiles();
 
             return pathToNearestStreet;
         }

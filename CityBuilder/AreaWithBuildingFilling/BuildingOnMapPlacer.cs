@@ -1,5 +1,5 @@
 using CityBuilder.Buildings;
-using CityBuilder.Map;
+using CityBuilder.MapModel;
 using CityBuilder.Util;
 
 namespace CityBuilder.AreaWithBuildingFilling

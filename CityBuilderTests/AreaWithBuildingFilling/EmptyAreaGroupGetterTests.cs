@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using CityBuilder.Map;
-using CityBuilder.Map.Tiles;
+using CityBuilder.MapModel;
+using CityBuilder.MapModel.Tiles;
 using NUnit.Framework;
 
 namespace CityBuilderTests.AreaWithBuildingFilling
@@ -13,7 +13,7 @@ namespace CityBuilderTests.AreaWithBuildingFilling
         [Test]
         public void IfNoEmptyTilesArePresent_ResultShallBeEmptyListOfGroups()
         {
-            var map = new CityBuilder.Map.Map(4, 7);
+            var map = new CityBuilder.MapModel.Map(4, 7);
             var emptyAreas = _cut.Get(map);
             Assert.AreEqual(0, emptyAreas.Count);
         }
@@ -21,7 +21,7 @@ namespace CityBuilderTests.AreaWithBuildingFilling
         [Test]
         public void IfMapContainsTwoGroupsOfTiles_TheyShallBeFound()
         {
-            var map = new CityBuilder.Map.Map(4, 7);
+            var map = new CityBuilder.MapModel.Map(4, 7);
 
             var firstExcpectedGroup = new List<ITile>
             {

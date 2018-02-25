@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using CityBuilder.Map;
+using CityBuilder.MapModel;
 using CityBuilder.Util;
 
 namespace CityBuilder.Buildings.Patterns

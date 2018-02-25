@@ -5,12 +5,18 @@ namespace CityBuilder.Extensions
 {
     public static class ListExtensions
     {
-        private static readonly Random _random;
+        private static Random _random;
+
+        public static void SetRandomizer(Random random)
+        {
+            _random = random;
+        }
 
         static ListExtensions()
         {
             _random = new Random();
         }
+
         public static T Random<T>(this IList<T> list)
         {
             var max = list.Count;
