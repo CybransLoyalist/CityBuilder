@@ -9,6 +9,27 @@ using Point = System.Drawing.Point;
 
 namespace CityBuilderGUI
 {
+    public class MapWithBuildingsFillerFactory
+    {
+        public virtual MapWithBuildingsFiller Create(IMap map)
+        {
+            return new MapWithBuildingsFiller(
+                map,
+                new EmptyAreaGroupGetter(),
+                new StreetsAppender(),
+                new AreaWithBuildingFiller(
+                    map,
+                    new RandomBuildingLocationGenerator(),
+                    new BuildingOnMapIfPossibleLocator(
+                        map,
+                        new BuildingOnMapLocator(),
+                        new PathToNearestStreetFromBuildingFinder(
+                            map,
+                            new BuildingOnMapLocator(),
+                            new ClosestStreetFinder())),
+                    new MapFillingParametersCalculator()));
+        }
+    }
     public class MapDrawer
     {
         public void Draw(IMap map, Graphics graphics, int TileSize)
@@ -91,11 +112,7 @@ namespace CityBuilderGUI
 
         private void FillMapWithBuildings(object sender, EventArgs e)
         {
-            new MapWithBuildingsFiller(
-                new EmptyAreaGroupGetter(),
-                new StreetsAppender(),
-                new AreaWithBuildingFiller(
-                    new BuildingTilesOnMapLocator())).FillMap(_map);
+            new MapWithBuildingsFillerFactory().Create(_map).FillMap();
             Refresh();
         }
 

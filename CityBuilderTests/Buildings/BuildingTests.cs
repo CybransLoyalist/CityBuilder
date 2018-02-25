@@ -1,5 +1,4 @@
 using System;
-using CityBuilder.Buildings;
 using CityBuilder.Buildings.Patterns;
 using CityBuilding;
 using NUnit.Framework;

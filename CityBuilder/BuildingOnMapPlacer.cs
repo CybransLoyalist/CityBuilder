@@ -5,16 +5,16 @@ namespace CityBuilder
 {
     public class BuildingOnMapPlacer //todo this class is unnecessary
     {
-        private readonly BuildingTilesOnMapLocator _buildingTilesOnMapLocator;
+        private readonly BuildingOnMapLocator _buildingOnMapLocator;
 
-        public BuildingOnMapPlacer(BuildingTilesOnMapLocator buildingTilesOnMapLocator)
+        public BuildingOnMapPlacer(BuildingOnMapLocator buildingOnMapLocator)
         {
-            _buildingTilesOnMapLocator = buildingTilesOnMapLocator;
+            _buildingOnMapLocator = buildingOnMapLocator;
         }
 
         public virtual void PlaceBuildingOn(IMap map, IBuilding building, Point placingPointOnMap, Angle angle)
         {
-            _buildingTilesOnMapLocator.Locate(map, building, placingPointOnMap);
+            _buildingOnMapLocator.Locate(map, building, placingPointOnMap);
         }
     }
 }

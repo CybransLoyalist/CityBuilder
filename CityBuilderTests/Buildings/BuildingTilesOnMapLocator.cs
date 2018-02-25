@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using CityBuilder;
-using CityBuilder.Buildings;
-using CityBuilder.Buildings.Patterns;
 using CityBuilding;
 using NUnit.Framework;
 
@@ -12,12 +7,12 @@ namespace CityBuilderTests.Buildings
     [TestFixture]
     public class BuildingTilesOnMapLocatorTests
     {
-        private BuildingTilesOnMapLocator _cut;
+        private BuildingOnMapLocator _cut;
 
         [SetUp]
         public void SetUp()
         {
-            _cut = new BuildingTilesOnMapLocator();
+            _cut = new BuildingOnMapLocator();
         }
 
         [TestCase(Angle.Zero)]

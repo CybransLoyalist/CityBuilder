@@ -6,7 +6,7 @@ using CityBuilding;
 
 namespace CityBuilder
 {
-    public class BuildingTilesOnMapLocator
+    public class BuildingOnMapLocator
     {
         public virtual void Locate(IMap map, IBuilding building, IPoint placingPointOnMap)
         {
